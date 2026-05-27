@@ -26,14 +26,12 @@ subscriptions:
     diff_threshold_pct: 15
   keyword_recall_mode: or
   intent_profiles:
-    # 口腔影像分析 - 核心领域
-    - tag: dental-imaging
+    - tag: di
       description: 口腔影像分析核心研究
       enabled: true
+      paper_sources:
+        - arxiv
       keywords:
-        - keyword: dental CBCT segmentation
-          keyword_cn: 牙科CBCT分割
-          query: 3D dental CBCT image segmentation methods and architectures
         - keyword: tooth segmentation
           keyword_cn: 牙齿分割
           query: automatic tooth segmentation in panoramic X-ray and CBCT images
@@ -49,15 +47,6 @@ subscriptions:
         - keyword: metal artifact reduction CBCT
           keyword_cn: CBCT金属伪影去除
           query: metal artifact reduction algorithms for dental CBCT imaging
-        - keyword: dental panoramic X-ray
-          keyword_cn: 口腔全景片
-          query: AI analysis of dental panoramic radiographs
-        - keyword: dental caries detection
-          keyword_cn: 龋齿检测
-          query: automatic dental caries detection using deep learning
-        - keyword: dental report generation
-          keyword_cn: 口腔报告生成
-          query: AI-generated dental diagnostic reports
       intent_queries:
         - query: state of the art dental image segmentation methods
           query_cn: 最先进的口腔影像分割方法
@@ -69,17 +58,17 @@ subscriptions:
           enabled: true
           source: manual
           note: ''
-        - query: semi-supervised learning for dental imaging
+        - query: semi supervised learning for dental imaging
           query_cn: 口腔影像的半监督学习
           enabled: true
           source: manual
           note: ''
-      updated_at: '2026-05-27T00:00:00.000Z'
-    
-    # 医学影像技术 - 通用方法
-    - tag: medical-imaging-tech
+      updated_at: '2026-05-27T09:00:21.612Z'
+    - tag: mit
       description: 医学影像通用技术
       enabled: true
+      paper_sources:
+        - arxiv
       keywords:
         - keyword: semi-supervised medical image segmentation
           keyword_cn: 半监督医学影像分割
@@ -93,15 +82,9 @@ subscriptions:
         - keyword: medical VLM
           keyword_cn: 医学视觉语言模型
           query: vision language models for medical image understanding
-        - keyword: nnUNet
-          keyword_cn: nnUNet框架
-          query: nnUNet self-configuring medical image segmentation
         - keyword: SAM medical
           keyword_cn: SAM医学应用
           query: Segment Anything Model applied to medical imaging
-        - keyword: multimodal medical fusion
-          keyword_cn: 多模态医学融合
-          query: multimodal fusion methods for medical imaging
       intent_queries:
         - query: latest advances in medical image segmentation
           query_cn: 医学影像分割最新进展
@@ -113,12 +96,12 @@ subscriptions:
           enabled: true
           source: manual
           note: ''
-      updated_at: '2026-05-27T00:00:00.000Z'
-    
-    # 顶级期刊 - Nature/Cell/Science
+      updated_at: '2026-05-27T09:00:33.725Z'
     - tag: top-journals
       description: 顶级期刊医学AI研究
       enabled: true
+      paper_sources:
+        - arxiv
       keywords:
         - keyword: Nature Medicine AI
           keyword_cn: Nature Medicine AI研究
@@ -142,11 +125,11 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-05-27T00:00:00.000Z'
-    
-    # 类器官芯片 - 前沿交叉领域
     - tag: organ-chip
       description: 类器官芯片与微流控
       enabled: true
+      paper_sources:
+        - arxiv
       keywords:
         - keyword: organ-on-a-chip
           keyword_cn: 器官芯片
@@ -170,11 +153,11 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-05-27T00:00:00.000Z'
-    
-    # 口腔顶级期刊
-    - tag: dental-journals
+    - tag: dj
       description: 口腔医学顶级期刊
       enabled: true
+      paper_sources:
+        - arxiv
       keywords:
         - keyword: Journal of Dental Research
           keyword_cn: 牙科研究杂志
@@ -198,3 +181,18 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-05-27T00:00:00.000Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
