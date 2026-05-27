@@ -1,6 +1,436 @@
 {
-  "generated_at": "2026-03-06T19:11:18.471356+00:00",
-  "updated_date": "20260306",
+  "generated_at": "2026-05-27T09:20:58.632848+00:00",
+  "updated_date": "20260518-20260527",
   "carryover_days": 9,
-  "items": []
+  "tag_states": {
+    "di": {
+      "updated_date": "20260518-20260527",
+      "carryover_days": 9,
+      "items": []
+    },
+    "mit": {
+      "updated_date": "20260518-20260527",
+      "carryover_days": 9,
+      "items": [
+        {
+          "id": "2605.22002v1",
+          "source": "arxiv",
+          "title": "ConvNeXt-FD: A Fractal-Based Deep Model for Robust Biomedical Image Segmentation",
+          "abstract": "Biomedical image segmentation is a critical task in medical diagnosis and treatment planning, enabling precise delineation of anatomical structures and pathological regions. Despite significant advancements, challenges persist due to the inherent variability, noise, and complex morphology present in diverse medical imaging modalities. This paper introduces ConvNeXt-FD, a novel deep learning architecture for robust biomedical image segmentation, built upon a U-Net-like encoder-decoder framework leveraging the powerful ConvNeXt backbone. Our approach integrates a hybrid loss function combining the Dice coefficient with a boundary-aware regularization term inspired by a differentiable formulation of Fractal Dimension, designed to enhance the model's sensitivity to object boundaries and shape fidelity. We rigorously evaluate ConvNeXt-FD across six distinct biomedical datasets: BUSI (Breast Ultrasound Images), DDTI (Thyroid Ultrasound Images), FluoCells (Fluorescent Cell Images), IDRiD (Diabetic Retinopathy Images for Optic Disc Segmentation), ISIC2018 (Skin Lesion Images), and MoNuSeg (Nuclei Segmentation). Experimental results demonstrate that ConvNeXt-FD, particularly when initialized with ImageNet pre-trained weights, achieves competitive and often superior performance compared to existing state-of-the-art methods across various metrics, including Dice, Jaccard, Accuracy, Sensitivity, Specificity, and False Positive Rate. The integration of ConvNeXt as a strong encoder, coupled with the boundary-aware regularization, proves effective in capturing both high-level semantic features and fine-grained boundary details, leading to more accurate and reliable segmentations in challenging biomedical contexts.",
+          "authors": [
+            "Joao Batista Florindo",
+            "Amanda Pontes de Oliveira Ornelas"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-05-21T04:58:24+00:00",
+          "link": "https://arxiv.org/pdf/2605.22002v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "novel deep architecture for robust biomedical image segmentation using ConvNeXt backbone and fractal dimension loss",
+          "llm_evidence_cn": "利用ConvNeXt骨干网络和分形维数损失进行鲁棒的生物医学图像分割",
+          "llm_evidence": "利用ConvNeXt骨干网络和分形维数损失进行鲁棒的生物医学图像分割",
+          "canonical_evidence": "利用ConvNeXt骨干网络和分形维数损失进行鲁棒的生物医学图像分割",
+          "llm_tldr_en": "Introduces ConvNeXt-FD, a U-Net-like encoder-decoder with ConvNeXt backbone and a hybrid loss including a fractal dimension-based boundary regularizer, for robust segmentation across modalities.",
+          "llm_tldr_cn": "针对生物医学图像分割中的变异性、噪声和复杂形态挑战，提出ConvNeXt-FD架构，采用ConvNeXt骨干的U型编码-解码结构，并引入融合分形维数的混合损失函数，增强边界感知。实验表明，该模型在多个医学图像模态上实现鲁棒且准确的分割，提升了分割方法的通用性和稳定性。",
+          "llm_tldr": "针对生物医学图像分割中的变异性、噪声和复杂形态挑战，提出ConvNeXt-FD架构，采用ConvNeXt骨干的U型编码-解码结构，并引入融合分形维数的混合损失函数，增强边界感知。实验表明，该模型在多个医学图像模态上实现鲁棒且准确的分割，提升了分割方法的通用性和稳定性。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "latest advances in medical image segmentation",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.22002v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.22249v1",
+          "source": "arxiv",
+          "title": "D3Seg: Dependency-Aware Diffusion for Brain Tumor Segmentation with Missing Modalities",
+          "abstract": "Accurate brain tumor segmentation using multiparametric MRI is critical for effective treatment planning. However, in clinical settings, complete acquisition of all MRI sequences is not always possible. The absence of certain MRI modalities results in substantial performance degradation in existing segmentation methods, which typically rely on naive feature concatenation or direct fusion strategies. To address this limitation, we propose a novel segmentation model D3Seg which is designed to maintain stable performance under missing-modality settings. D3Seg introduces Multi-hop Modality Graph Fusion (MMGF) to model higher order inter-modality dependencies, a lightweight diffusion-based imputation mechanism to compensate for missing T1ce representations in latent space, and probability-space decision refinement to mitigate dominant class overconfidence and improve delineation of underrepresented tumor subregions. Extensive evaluation on BraTS 2023 dataset demonstrates that our D3Seg model consistently improves segmentation performance under missing modality configurations. The proposed model achieves approximately 1.5-2.0% Dice improvement on enhancing tumor (ET) and around 1.0% on tumor core (TC) across multiple missing modality configurations compared to the current state-of-the-art model, while maintaining computational efficiency.",
+          "authors": [
+            "Danish Ali",
+            "Ajmal Mian",
+            "Naveed Akhtar",
+            "Ghulam Mubashar Hassan"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-05-21T09:55:42+00:00",
+          "link": "https://arxiv.org/pdf/2605.22249v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "uses diffusion-based imputation to compensate missing MRI modalities in brain tumor segmentation",
+          "llm_evidence_cn": "使用基于扩散的插补机制补偿缺失MRI模态以进行脑肿瘤分割",
+          "llm_evidence": "使用基于扩散的插补机制补偿缺失MRI模态以进行脑肿瘤分割",
+          "canonical_evidence": "使用基于扩散的插补机制补偿缺失MRI模态以进行脑肿瘤分割",
+          "llm_tldr_en": "Proposes D3Seg with multi-hop graph fusion and lightweight diffusion-based imputation to robustly segment brain tumors when some MRI modalities are missing.",
+          "llm_tldr_cn": "针对多参数MRI脑肿瘤分割中模态缺失导致性能下降的问题，提出D3Seg模型，通过多跳模态图融合建模高阶依赖，并利用轻量级扩散插补补偿缺失模态。在公开数据集上，缺失模态设置下分割性能显著优于现有方法，为临床不完整数据下的可靠分割提供了新思路。",
+          "llm_tldr": "针对多参数MRI脑肿瘤分割中模态缺失导致性能下降的问题，提出D3Seg模型，通过多跳模态图融合建模高阶依赖，并利用轻量级扩散插补补偿缺失模态。在公开数据集上，缺失模态设置下分割性能显著优于现有方法，为临床不完整数据下的可靠分割提供了新思路。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "diffusion models for medical image synthesis and generation",
+          "matched_requirement_id": "req-11",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.22249v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.22357v1",
+          "source": "arxiv",
+          "title": "VEELA: A Clinically-Constrained Benchmark for Liver Vessel Segmentation in Computed Tomography Angiography",
+          "abstract": "Accurate segmentation of hepatic and portal vessels in contrast-enhanced computed tomography angiography (CTA) remains challenging due to complex vascular topology, peripheral visibility limitations, and acquisition-induced ambiguities. While existing public datasets offer valuable benchmarks, few include clinically realistic annotation constraints. We introduce VEELA (Vessel Extraction and Extrication for Liver Analysis), a rigorously curated liver vessel dataset derived from 40 CTA scans inherited from the CHAOS grand-challenge cohort. All vessels were manually delineated slice-by-slice under multi-expert consensus, using a strict visibility-driven annotation policy and avoiding anatomically inferred interpolation. This design explicitly captures anatomical variability and imaging-related uncertainty. As a continuation of the CHAOS challenge, VEELA enables reproducible cross-benchmark evaluation while extending the scope to fine-grained hepatic and portal vessel segmentation. We further establish a standardized benchmarking framework and analyze complementary evaluation metrics, including topology-aware (clDice), overlap-based (IoU), boundary-sensitive (NSD), and geometry-aware (area, length) measures. Our results demonstrate that different metrics capture distinct aspects of vascular integrity, underscoring the necessity of multi-perspective evaluation for clinically meaningful vessel segmentation. VEELA is publicly released to facilitate reproducible research and support the development of robust vascular segmentation methods. Researchers can access the evaluation metrics, dataset, and submission platform at https://www.synapse.org/Synapse:syn65471967.",
+          "authors": [
+            "Ziya Ata Yazıcı",
+            "N. Sinem Gezer",
+            "İlkay Öksüz",
+            "İlker Özgür Koska",
+            "Tuğçe Toprak",
+            "Pervin Bulucu",
+            "Ufuk Beşenk",
+            "A. Emre Kavur",
+            "Pierre-Henri Conze",
+            "Hazım Kemal Ekenel",
+            "Oğuz Dicle",
+            "Mustafa Ege Şeker",
+            "Mustafa Said Kartal",
+            "Ariorad Moniri",
+            "Orhan Özkan",
+            "Osman Faruk Bayram",
+            "Hakan Polat",
+            "Musa Balcı",
+            "Ece Tuğba Cebeci",
+            "Baran Cılga",
+            "Kardelen Peçenek",
+            "M. Alper Selver"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-05-21T11:42:47+00:00",
+          "link": "https://arxiv.org/pdf/2605.22357v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "CT liver vessel segmentation benchmark",
+          "llm_evidence_cn": "CT肝脏血管分割基准",
+          "llm_evidence": "CT肝脏血管分割基准",
+          "canonical_evidence": "CT肝脏血管分割基准",
+          "llm_tldr_en": "Introduces VEELA, a clinically-constrained liver vessel segmentation benchmark from 40 CTA scans with multi-expert visibility-driven annotations, for rigorous evaluation.",
+          "llm_tldr_cn": "针对肝脏血管分割数据集缺乏临床标注约束的现状，构建了VEELA基准。该数据集包含40例CTA扫描，由多位专家基于严格的可视性策略进行逐层手动标注，避免解剖推断。VEELA为在临床逼真条件下测试分割算法提供了平台，揭示了现有方法在复杂血管拓扑和外周可见性方面的不足，推动肝脏分割研究向临床转化。",
+          "llm_tldr": "针对肝脏血管分割数据集缺乏临床标注约束的现状，构建了VEELA基准。该数据集包含40例CTA扫描，由多位专家基于严格的可视性策略进行逐层手动标注，避免解剖推断。VEELA为在临床逼真条件下测试分割算法提供了平台，揭示了现有方法在复杂血管拓扑和外周可见性方面的不足，推动肝脏分割研究向临床转化。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "latest advances in medical image segmentation",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.22357v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.23995v1",
+          "source": "arxiv",
+          "title": "Task-Aligned Self-Supervised Learning for Medical Image Analysis: A Systematic Review and Practical Design Guidelines",
+          "abstract": "Self-supervised learning (SSL) has emerged as a promising paradigm for addressing the annotation bottleneck in medical imaging by learning representations from unlabeled data. However, its effectiveness depends heavily on the design of the pretext task and its alignment with the downstream clinical objective. We present a systematic, task-oriented review of SSL in medical imaging, examining how different pretext-task formulations influence performance across classification, segmentation, detection, and other tasks. Following PRISMA guidelines, we analyze 75 studies published between 2017 and 2025 and organize them into four paradigms: contrastive, non-contrastive and predictive, generative and reconstruction-based, and hybrid learning. Rather than cataloguing methods by architecture, we map each paradigm to the downstream objectives it best supports. Our analysis shows there is no universally optimal SSL strategy; instead, performance is governed by the alignment between the pretext task, the imaging modality, and the target task. Contrastive methods learn global discriminative features and align well with classification, but may overlook subtle pathological patterns. Generative and spatial prediction-based approaches better preserve local anatomical structure, making them more suitable for segmentation and other dense prediction tasks, while hybrid methods offer the most balanced performance. We further show that modality-specific design is critical and that SSL provides its greatest benefit in low-label and few-shot regimes. Finally, we distill these findings into practical design guidelines and outline open challenges, including pathology-aware pretext task design, resource-efficient training for high-dimensional data, and standardized evaluation protocols. This work offers practical guidance for designing more effective and clinically relevant SSL frameworks in medical imaging.",
+          "authors": [
+            "Chathura Wimalasiri"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-05-18T04:47:50+00:00",
+          "link": "https://arxiv.org/pdf/2605.23995v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Systematic review of SSL for medical image analysis",
+          "llm_evidence_cn": "医学图像分析自监督学习系统综述",
+          "llm_evidence": "医学图像分析自监督学习系统综述",
+          "canonical_evidence": "医学图像分析自监督学习系统综述",
+          "llm_tldr_en": "A systematic review of 75 SSL studies in medical imaging, providing task-aligned design guidelines by analyzing how pretext tasks affect downstream performance.",
+          "llm_tldr_cn": "针对自监督学习在医学图像分析中预训练任务与下游目标对齐问题，本综述系统分析了2017至2025年间75项研究，将自监督范式归纳为对比、非对比预测、生成重建四类。研究系统考察了预训练任务设计对分类、分割、检测等下游性能的影响，并提炼出任务对齐的设计原则。该工作为医学图像自监督学习的实践应用提供了明确指导。",
+          "llm_tldr": "针对自监督学习在医学图像分析中预训练任务与下游目标对齐问题，本综述系统分析了2017至2025年间75项研究，将自监督范式归纳为对比、非对比预测、生成重建四类。研究系统考察了预训练任务设计对分类、分割、检测等下游性能的影响，并提炼出任务对齐的设计原则。该工作为医学图像自监督学习的实践应用提供了明确指导。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "semi-supervised and self-supervised methods for medical image segmentation",
+          "matched_requirement_id": "req-9",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.23995v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.26026v1",
+          "source": "arxiv",
+          "title": "A Multimodal 3D Foundation Model for Light Sheet Fluorescence Microscopy Enables Few-Shot Segmentation, Classification, and Deblurring",
+          "abstract": "Light sheet fluorescence microscopy (LSM) enables high-resolution, three-dimensional (3D) imaging of biological specimens, providing rich volumetric data for studying cellular organization, pathology, and vascular networks. However, the size, dimensionality, and annotation burden of LSM data make supervised deep learning approaches costly and difficult to scale. Additionally, despite the abundance of unannotated LSM volumes, foundation models for this modality remain underexplored due to computational challenges and the complexity of volumetric representation learning. In this work, we introduce a 3D foundation model for LSM data, pretrained on a large curated collection of 3D images spanning multiple organisms, stains, and imaging protocols. We learn transferable volumetric representations by jointly optimizing for masked reconstruction and image-text alignment. The pretrained backbone drastically reduces the annotation burden, enabling efficient, few-shot adaptation for varied downstream tasks. We evaluate this approach on downstream segmentation, classification, and deblurring. Our results demonstrate consistent improvements over baselines, (1) when measured using standard evaluation metrics and (2) when rigorously assessed by domain experts. This highlights the potential of foundation model pretraining to reduce annotation requirements while improving performance across diverse LSM analysis tasks. Pretrained model weights and code for pretraining and finetuning are publicly available: https://github.com/AdinaScheinfeld/lsm_fm_public_repo.git.",
+          "authors": [
+            "Adina Scheinfeld",
+            "Haotan Zhang",
+            "Shang Mu",
+            "Rudolf L. M. van Herten",
+            "Lucas Stoffl",
+            "Ali Erturk",
+            "Zhuhao Wu",
+            "Johannes C. Paetzold"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "published": "2026-05-25T16:50:58+00:00",
+          "link": "https://arxiv.org/pdf/2605.26026v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:mit",
+            "query:organ-chip"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "introduces a 3D foundation model for light sheet fluorescence microscopy",
+          "llm_evidence_cn": "提出了一个面向光片荧光显微镜的3D基础模型",
+          "llm_evidence": "提出了一个面向光片荧光显微镜的3D基础模型",
+          "canonical_evidence": "提出了一个面向光片荧光显微镜的3D基础模型",
+          "llm_tldr_en": "A 3D foundation model for light sheet fluorescence microscopy, pretrained on a large curated 3D image collection, enables few-shot segmentation, classification, and deblurring tasks with limited annotations.",
+          "llm_tldr_cn": "该研究针对光片荧光显微镜（LSM）数据量大、标注负担重、现有基础模型研究不足的问题，提出了一个3D基础模型，在大量精心整理的3D图像上预训练。模型支持少样本分割、分类和去模糊任务，显著减少了对标注数据的依赖。该工作扩展了基础模型在体视显微镜成像领域的应用，为细胞组织分析提供了高效工具。",
+          "llm_tldr": "该研究针对光片荧光显微镜（LSM）数据量大、标注负担重、现有基础模型研究不足的问题，提出了一个3D基础模型，在大量精心整理的3D图像上预训练。模型支持少样本分割、分类和去模糊任务，显著减少了对标注数据的依赖。该工作扩展了基础模型在体视显微镜成像领域的应用，为细胞组织分析提供了高效工具。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "foundation models for medical imaging",
+          "matched_requirement_id": "req-15",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.26026v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.24771v1",
+          "source": "arxiv",
+          "title": "From Theory to Decision Rule: Calibrating the Noisy-Label Crossover for Vision-Language Model Weak Supervision Across Three Medical-Imaging Benchmarks",
+          "abstract": "Classical noisy-label theory predicts that downstream performance under weak supervision is bounded above by the labeler's accuracy, implying a sharp crossover: once a gold-trained classifier matches the labeler, weak labels stop helping and start hurting. The prediction is theoretical; what is missing is a benchmark calibration that turns it into an instance-level statement for modern foundation-model labelers. We provide such a calibration for BiomedCLIP-generated weak labels on three medical-imaging benchmarks (PCAM, ISIC, NIH-CXR) and six downstream architectures spanning an 11x parameter range. The crossover predicted by theory appears at ng~100 on PCAM, 20-50 on ISIC, and 250-500 on NIH-CXR; weak labels above the crossover degrade AUC by up to -0.10. The location is architecture-invariant for four of five pretrained architectures, and a within-family DenseNet sweep (2.5x parameters, identical pretraining) supports the view that the labeler, not the student, is the dominant constraint. The calibration in turn produces a decision rule operable from 10-20 gold labels: compare gold-only AUC to VLM accuracy on the user's gold set. A structured-vs-random noise sign flip on NIH-CXR shows that the rate-only formulation of the bound is incomplete and identifies a concrete refinement (label-space projection) that future benchmarks can be designed to test.",
+          "authors": [
+            "Bruce Changlong Xu",
+            "Jose James",
+            "Alexander Ryu"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "published": "2026-05-23T23:15:07+00:00",
+          "link": "https://arxiv.org/pdf/2605.24771v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "calibrates noisy-label crossover for BiomedCLIP weak labels on medical imaging",
+          "llm_evidence_cn": "校准BiomedCLIP弱标签在医学影像上的噪声标签交叉点",
+          "llm_evidence": "校准BiomedCLIP弱标签在医学影像上的噪声标签交叉点",
+          "canonical_evidence": "校准BiomedCLIP弱标签在医学影像上的噪声标签交叉点",
+          "llm_tldr_en": "The paper calibrates the theoretical noisy-label crossover for BiomedCLIP-generated weak labels on three medical-imaging benchmarks, providing instance-level decision rules for when weak labels stop helping.",
+          "llm_tldr_cn": "该研究将经典噪声标签理论预测的交叉点校准到BiomedCLIP生成的弱标签上，在三个医学影像基准和六种下游架构上进行了大规模实验。结果显示交叉点确实存在且可预测，为使用基础模型弱标签的实践提供了何时应停止使用弱标签的决策规则，对提高医学影像分析中的弱监督效率具有重要意义。",
+          "llm_tldr": "该研究将经典噪声标签理论预测的交叉点校准到BiomedCLIP生成的弱标签上，在三个医学影像基准和六种下游架构上进行了大规模实验。结果显示交叉点确实存在且可预测，为使用基础模型弱标签的实践提供了何时应停止使用弱标签的决策规则，对提高医学影像分析中的弱监督效率具有重要意义。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "vision language models for medical image understanding",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.24771v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.21633v1",
+          "source": "arxiv",
+          "title": "VRXU-net: A Deep Learning Approach for Brain Ischemic Stroke Lesion Detection and Segmentation in T1W MRI",
+          "abstract": "When the blood supply to the brain is obstructed by a clot, oxygen delivery to brain tissues becomes insufficient, leading to cellular necrosis. In healthcare settings, accurately identifying and delineating ischemic lesion boundaries is essential for treatment and surgical planning. However, ischemic stroke lesions vary widely in shape, size, and location, and in grayscale MRI modalities such as T1W they may resemble surrounding brain structures. This makes lesion detection and segmentation a challenging task for clinicians. This study introduces a novel VRU-Net architecture, derived from visual features, residual connections, and a U-shaped network, for detecting and segmenting ischemic stroke lesions in 3D magnetic resonance imaging scans. The proposed method first uses a modified VGG model to identify ischemic stroke in separate 2D slices. Then, a U-shaped segmentation model with residual blocks segments the lesion in each slice. This procedure is applied independently to the axial, sagittal, and coronal planes, and the final output is generated by aggregating the three segmentation results. To improve both performance and processing speed, a high-performance classifier is applied before the segmentation model in a sequential framework. This strategy reduces unnecessary segmentation of non-lesion slices and improves overall accuracy. In addition, decomposing 3D images into 2D slices reduces model complexity while allowing information from three anatomical planes to support more accurate lesion localization. The proposed model is trained on the Anatomical Tracings of Lesions After Stroke dataset and outperforms state-of-the-art models in terms of accuracy and Dice coefficient. Moreover, the segmentation output provides feedback that helps the classification model reduce false-positive predictions.",
+          "authors": [
+            "Sayed Amir Mousavi Mobarakeh"
+          ],
+          "primary_category": "eess.IV",
+          "categories": [
+            "eess.IV",
+            "cs.CV"
+          ],
+          "published": "2026-05-20T18:44:08+00:00",
+          "link": "https://arxiv.org/pdf/2605.21633v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Novel VRU-Net architecture for ischemic stroke lesion segmentation",
+          "llm_evidence_cn": "新型 VRU-Net 架构用于缺血性卒中病灶分割",
+          "llm_evidence": "新型 VRU-Net 架构用于缺血性卒中病灶分割",
+          "canonical_evidence": "新型 VRU-Net 架构用于缺血性卒中病灶分割",
+          "llm_tldr_en": "Proposes VRU-Net, combining visual features, residual connections, and U-Net for 3D ischemic stroke lesion segmentation in T1W MRI, addressing shape, size, and location variability.",
+          "llm_tldr_cn": "针对 T1W MRI 中缺血病灶形状、大小和位置多变且与周围组织相似难以分割的问题，提出 VRU-Net 架构，融合视觉特征、残差连接和 U 型网络，实现三维病灶的精准检测与分割。实验表明该方法能有效捕捉病灶边界，为临床治疗和手术规划提供可靠依据。",
+          "llm_tldr": "针对 T1W MRI 中缺血病灶形状、大小和位置多变且与周围组织相似难以分割的问题，提出 VRU-Net 架构，融合视觉特征、残差连接和 U 型网络，实现三维病灶的精准检测与分割。实验表明该方法能有效捕捉病灶边界，为临床治疗和手术规划提供可靠依据。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "latest advances in medical image segmentation",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.21633v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.23559v1",
+          "source": "arxiv",
+          "title": "PathNavigate: A Training-Free Pathology Agent with Surprise-Guided Scan and Shared Slide Memory for Whole-Slide Image VQA",
+          "abstract": "Whole-slide image visual question answering (WSI-VQA) frames pathology as an extreme-context search problem: to answer a free-form clinical query, a system must first navigate a gigapixel slide under a strict inspection budget to locate sparse, high-resolution evidence. Existing approaches largely fall into two paradigms: i) supervised pathology multimodal large language models (MLLMs) and agents can absorb localization and reasoning into learned modules, but they often couple navigation to task-specific supervision and retraining, limiting their practicality; ii) training-free pathology agents avoid this cost by keeping core models frozen, but often follow a question-first design, constructing the initial candidate set mainly from query-conditioned relevance. This can miss decisive morphology that is not named in the question, and force heavier inference-time scaffolding. To address this challenge, we introduce PathNavigate, a training-free pathology agent built around a scan-search-readout routine. Before question matching, PathNavigate scans the current slide at low magnification with a shared online memory module over frozen pathology features, producing a slide-specific surprise field that marks an abnormal-region pool. It then applies question-conditioned PLIP relevance only within this pool to select high-magnification search targets. Finally, it extracts local high-magnification evidence and answers with a frozen perceptor-adjudicator stack, using the same online memory as slide-level context. Experiments on WSI-VQA and SlideBench-BCNB show that the proposed scan-search-readout design improves answer accuracy and yields more interpretable evidence-selection trajectories with higher efficiency.The code is available online.",
+          "authors": [
+            "Chunze Yang",
+            "Qidong Liu",
+            "Wenjie Zhao",
+            "Yue Tang",
+            "Jiusong Ge",
+            "Di Zhang",
+            "Jiashuai Liu",
+            "Lei Wu",
+            "Junbo Lu",
+            "Ni Zhang",
+            "Xian Wu",
+            "Zeyu Gao",
+            "Chen Li"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-05-22T12:25:43+00:00",
+          "link": "https://arxiv.org/pdf/2605.23559v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "pathology WSI VQA using training-free agent with VLM",
+          "llm_evidence_cn": "使用训练自由代理和视觉语言模型的病理全切片图像问答",
+          "llm_evidence": "使用训练自由代理和视觉语言模型的病理全切片图像问答",
+          "canonical_evidence": "使用训练自由代理和视觉语言模型的病理全切片图像问答",
+          "llm_tldr_en": "Presents PathNavigate, a training-free agent for whole-slide image visual question answering in pathology, using surprise-guided navigation and shared slide memory to efficiently locate evidence for free-form clinical queries.",
+          "llm_tldr_cn": "针对全切片病理图像视觉问答中的极大规模搜索问题，提出训练自由代理PathNavigate。该方法通过惊讶引导扫描和共享切片记忆，在有限检查预算下高效定位高分辨率证据，从而回答自由形式临床查询。实验表明其优于依赖任务特定监督或训练自由但问询优先的现有方法，提升了病理AI的实用性。",
+          "llm_tldr": "针对全切片病理图像视觉问答中的极大规模搜索问题，提出训练自由代理PathNavigate。该方法通过惊讶引导扫描和共享切片记忆，在有限检查预算下高效定位高分辨率证据，从而回答自由形式临床查询。实验表明其优于依赖任务特定监督或训练自由但问询优先的现有方法，提升了病理AI的实用性。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "vision language models for medical image understanding",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.23559v1",
+          "carry_days": 1
+        }
+      ]
+    },
+    "top-journals": {
+      "updated_date": "20260518-20260527",
+      "carryover_days": 9,
+      "items": []
+    },
+    "organ-chip": {
+      "updated_date": "20260518-20260527",
+      "carryover_days": 9,
+      "items": []
+    },
+    "dj": {
+      "updated_date": "20260518-20260527",
+      "carryover_days": 9,
+      "items": []
+    }
+  }
 }
