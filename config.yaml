@@ -25,3 +25,176 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    # 口腔影像分析 - 核心领域
+    - tag: dental-imaging
+      description: 口腔影像分析核心研究
+      enabled: true
+      keywords:
+        - keyword: dental CBCT segmentation
+          keyword_cn: 牙科CBCT分割
+          query: 3D dental CBCT image segmentation methods and architectures
+        - keyword: tooth segmentation
+          keyword_cn: 牙齿分割
+          query: automatic tooth segmentation in panoramic X-ray and CBCT images
+        - keyword: oral image analysis
+          keyword_cn: 口腔影像分析
+          query: AI methods for oral and dental image analysis
+        - keyword: dental implant planning
+          keyword_cn: 种植牙规划
+          query: AI-assisted dental implant planning and placement
+        - keyword: periodontal disease assessment
+          keyword_cn: 牙周病评估
+          query: AI methods for periodontal disease diagnosis and assessment
+        - keyword: metal artifact reduction CBCT
+          keyword_cn: CBCT金属伪影去除
+          query: metal artifact reduction algorithms for dental CBCT imaging
+        - keyword: dental panoramic X-ray
+          keyword_cn: 口腔全景片
+          query: AI analysis of dental panoramic radiographs
+        - keyword: dental caries detection
+          keyword_cn: 龋齿检测
+          query: automatic dental caries detection using deep learning
+        - keyword: dental report generation
+          keyword_cn: 口腔报告生成
+          query: AI-generated dental diagnostic reports
+      intent_queries:
+        - query: state of the art dental image segmentation methods
+          query_cn: 最先进的口腔影像分割方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: dental CBCT reconstruction quality evaluation
+          query_cn: 牙科CBCT重建质量评估
+          enabled: true
+          source: manual
+          note: ''
+        - query: semi-supervised learning for dental imaging
+          query_cn: 口腔影像的半监督学习
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-27T00:00:00.000Z'
+    
+    # 医学影像技术 - 通用方法
+    - tag: medical-imaging-tech
+      description: 医学影像通用技术
+      enabled: true
+      keywords:
+        - keyword: semi-supervised medical image segmentation
+          keyword_cn: 半监督医学影像分割
+          query: semi-supervised and self-supervised methods for medical image segmentation
+        - keyword: 3D medical image registration
+          keyword_cn: 3D医学影像配准
+          query: deformable registration methods for 3D medical images
+        - keyword: medical image generation diffusion
+          keyword_cn: 医学影像生成扩散模型
+          query: diffusion models for medical image synthesis and generation
+        - keyword: medical VLM
+          keyword_cn: 医学视觉语言模型
+          query: vision language models for medical image understanding
+        - keyword: nnUNet
+          keyword_cn: nnUNet框架
+          query: nnUNet self-configuring medical image segmentation
+        - keyword: SAM medical
+          keyword_cn: SAM医学应用
+          query: Segment Anything Model applied to medical imaging
+        - keyword: multimodal medical fusion
+          keyword_cn: 多模态医学融合
+          query: multimodal fusion methods for medical imaging
+      intent_queries:
+        - query: latest advances in medical image segmentation
+          query_cn: 医学影像分割最新进展
+          enabled: true
+          source: manual
+          note: ''
+        - query: foundation models for medical imaging
+          query_cn: 医学影像基础模型
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-27T00:00:00.000Z'
+    
+    # 顶级期刊 - Nature/Cell/Science
+    - tag: top-journals
+      description: 顶级期刊医学AI研究
+      enabled: true
+      keywords:
+        - keyword: Nature Medicine AI
+          keyword_cn: Nature Medicine AI研究
+          query: artificial intelligence research published in Nature Medicine
+        - keyword: Cell Medicine imaging
+          keyword_cn: Cell Medicine影像研究
+          query: medical imaging research in Cell Medicine
+        - keyword: Science Translational Medicine
+          keyword_cn: Science转化医学
+          query: translational medicine research in Science journals
+        - keyword: Nature Biomedical Engineering
+          keyword_cn: Nature生物医学工程
+          query: biomedical engineering research in Nature
+        - keyword: Lancet Digital Health
+          keyword_cn: Lancet数字健康
+          query: digital health and AI in Lancet journals
+      intent_queries:
+        - query: AI clinical validation in top medical journals
+          query_cn: 顶级医学期刊AI临床验证
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-27T00:00:00.000Z'
+    
+    # 类器官芯片 - 前沿交叉领域
+    - tag: organ-chip
+      description: 类器官芯片与微流控
+      enabled: true
+      keywords:
+        - keyword: organ-on-a-chip
+          keyword_cn: 器官芯片
+          query: organ-on-a-chip microfluidic devices for biomedical research
+        - keyword: organoid
+          keyword_cn: 类器官
+          query: organoid culture and 3D tissue engineering
+        - keyword: microfluidics tissue
+          keyword_cn: 微流控组织工程
+          query: microfluidic platforms for tissue engineering
+        - keyword: dental organoid
+          keyword_cn: 口腔类器官
+          query: dental and oral organoid research
+        - keyword: jaw organoid
+          keyword_cn: 颌骨类器官
+          query: jaw bone and maxillofacial organoid development
+      intent_queries:
+        - query: organ-on-a-chip applications in dental research
+          query_cn: 器官芯片在口腔研究中的应用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-27T00:00:00.000Z'
+    
+    # 口腔顶级期刊
+    - tag: dental-journals
+      description: 口腔医学顶级期刊
+      enabled: true
+      keywords:
+        - keyword: Journal of Dental Research
+          keyword_cn: 牙科研究杂志
+          query: research published in Journal of Dental Research
+        - keyword: Dental Materials
+          keyword_cn: 牙科材料
+          query: dental materials research and AI applications
+        - keyword: Clinical Oral Implants Research
+          keyword_cn: 临床种植研究
+          query: clinical research on oral implants
+        - keyword: Journal of Clinical Periodontology
+          keyword_cn: 临床牙周病学杂志
+          query: clinical periodontology research
+        - keyword: International Journal of Oral Science
+          keyword_cn: 国际口腔科学杂志
+          query: oral science research in international journals
+      intent_queries:
+        - query: AI applications in clinical dentistry
+          query_cn: AI在临床口腔医学中的应用
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-05-27T00:00:00.000Z'
