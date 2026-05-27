@@ -6,169 +6,116 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-18 ~ 2026-05-27
-- 运行时间：2026-05-27 11:10:33 UTC
+- 最新运行日期：2026-05-27
+- 运行时间：2026-05-27 21:29:47 UTC
 - 运行状态：成功
-- 本次总论文数：49
-- 精读区：34
+- 本次总论文数：31
+- 精读区：16
 - 速读区：15
 
 ### 今日简报（AI）
-今日精读34篇医学AI论文，其中满分研究《MedFM-Robust》揭示了医疗基础模型在真实世界偏移下的稳健性危机。  
-最值得关注：医疗基础模型面对分布变化普遍脆弱，而少样本分割与物理驱动图神经网络在牙科场景中展现新解法。  
-建议读者从模型鲁棒性基准测试入手，或探索物理信息网络在临床环境模拟中的跨界应用。
-- 详情：[/20260518-20260527/README](/20260518-20260527/README)
+- 今日共生成 31 篇推荐（精读 16 篇，速读 15 篇）
+- 精读：《SegGuidedNet: Sub-Region-Aware Attention Supervision for Interpretable Brain Tumor Segmentation》（10.0/10）, 《MARVEL: Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation》（10.0/10）
+- 速读：《Vision Harnessing Agent for Open Ad-hoc Segmentation》（8.0/10）, 《Disentangling Sampling from Training Budget in Class-Imbalanced CT Body Composition Segmentation》（8.0/10）, 《SurgOnAir: Hierarchy-Aware Real-Time Surgical Video Commentary》（8.0/10）
+- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
+- 详情：[/202605/27/README](/202605/27/README)
 
 ### 精读区论文标签
-1. [MedFM-Robust: Benchmarking Robustness of Medical Foundation Models](/20260518-20260527/2605.19027v1-medfm-robust-benchmarking-robustness-of-medical-foundation-models)  
+1. [SegGuidedNet: Sub-Region-Aware Attention Supervision for Interpretable Brain Tumor Segmentation](/202605/27/2605.22572v1-segguidednet-sub-region-aware-attention-supervision-for-interpretable-brain-tumor-segmentation)  
    标签：评分：10.0/10、query:mit
-   evidence：基准测试医学基础模型包括基于SAM的分割模型的鲁棒性
-2. [MedFM-Robust: Benchmarking Robustness of Medical Foundation Models](/20260518-20260527/2605.19027v3-medfm-robust-benchmarking-robustness-of-medical-foundation-models)  
+   evidence：提出一种新的带注意监督的脑肿瘤分割方法，推进医学图像分割
+2. [MARVEL: Universal Murray's Law-informed Vessel Tree Segmentation and Topology Estimation](/202605/27/2605.25363v1-marvel-universal-murrays-law-informed-vessel-tree-segmentation-and-topology-estimation)  
    标签：评分：10.0/10、query:mit
-   evidence：评估基于SAM的医学分割模型的鲁棒性
-3. [EPC-3D-Diff: Equivariant Physics Consistent Conditional 3D Latent Diffusion for CBCT to CT Synthesis](/20260518-20260527/2605.20470v1-epc-3d-diff-equivariant-physics-consistent-conditional-3d-latent-diffusion-for-cbct-to-ct-synthesis)  
+   evidence：提出一种结合生物物理先验的血管分割框架，推进医学图像分割
+3. [Not All Tokens Matter Equally: Dynamic In-context Vector Distillation with Decisive-Token Supervision for Long-form Medical Report Generation](/202605/27/2605.27194v1-not-all-tokens-matter-equally-dynamic-in-context-vector-distillation-with-decisive-token-supervision-for-long-form-medical-report-generation)  
    标签：评分：10.0/10、query:mit
-   evidence：基于物理等变损失的条件3D潜在扩散用于CBCT到CT合成
-4. [Look-Closer-Then-Diagnose: Confidence-Aware Ultrasound VQA via Active Zooming](/20260518-20260527/2605.21652v1-look-closer-then-diagnose-confidence-aware-ultrasound-vqa-via-active-zooming)  
-   标签：评分：10.0/10、query:mit
-   evidence：提出一种带缩放机制的超声视觉问答框架，直接解决医学图像理解中的视觉语言模型应用
-5. [Universal CT Representations from Anatomy to Disease Phenotype through Agglomerative Pretraining](/20260518-20260527/2605.21906v2-universal-ct-representations-from-anatomy-to-disease-phenotype-through-agglomerative-pretraining)  
-   标签：评分：10.0/10、query:mit
-   evidence：通过聚合式预训练构建支持多任务的CT基础模型
-6. [GlobalDentBench: A Multinational Benchmark for Evaluating LLM Clinical Reasoning in Dentistry with Expert Calibration](/20260518-20260527/2605.24636v1-globaldentbench-a-multinational-benchmark-for-evaluating-llm-clinical-reasoning-in-dentistry-with-expert-calibration)  
-   标签：评分：10.0/10、query:dj
-   evidence：跨国牙科LLM临床推理基准测试
-7. [K-U-KAN: Koopman-Enhanced U-KAN for 3D Dental Reconstruction from a Single Panoramic X-ray Radiograph](/20260518-20260527/2605.25163v1-k-u-kan-koopman-enhanced-u-kan-for-3d-dental-reconstruction-from-a-single-panoramic-x-ray-radiograph)  
-   标签：评分：10.0/10、query:di
-   evidence：从单张全景X光片进行3D牙齿重建
-8. [Patch-MoE Mamba: A Patch-Ordered Mixture-of-Experts State Space Architecture for Medical Image Segmentation](/20260518-20260527/2605.17719v1-patch-moe-mamba-a-patch-ordered-mixture-of-experts-state-space-architecture-for-medical-image-segmentation)  
+   evidence：聚焦于使用VLM蒸馏的医疗报告生成，直接相关于医学图像理解的视觉语言模型
+4. [Rethinking Visual Attribution for Chest X-ray Reasoning in Large Vision Language Models](/202605/27/2605.20158v1-rethinking-visual-attribution-for-chest-x-ray-reasoning-in-large-vision-language-models)  
    标签：评分：9.0/10、query:mit
-   evidence：Patch-MoE Mamba：面向医学图像分割的块排序混合专家状态空间架构
-9. [AURORA: Contextual Orthogonalization for Geometric Representation Learning in Healthcare Foundation Models](/20260518-20260527/2605.17765v1-aurora-contextual-orthogonalization-for-geometric-representation-learning-in-healthcare-foundation-models)  
+   evidence：大型视觉语言模型用于胸部X光片推理
+5. [Regulating Anatomy-Aware Rewards via Trajectory-Integral Feedback for Volumetric Computed Tomography Analysis](/202605/27/2605.20277v1-regulating-anatomy-aware-rewards-via-trajectory-integral-feedback-for-volumetric-computed-tomography-analysis)  
    标签：评分：9.0/10、query:mit
-   evidence：通过上下文正交化实现医疗健康基础模型的表示学习
-10. [Rad-VLSM: A Cross-Modal Framework with Semantics-Assisted Prompting for Medical Segmentation and Diagnosis](/20260518-20260527/2605.18130v1-rad-vlsm-a-cross-modal-framework-with-semantics-assisted-prompting-for-medical-segmentation-and-diagnosis)  
+   evidence：面向3D CT分析的医学视觉语言模型，采用解剖感知强化学习减少评估幻觉
+6. [Uncertainty-Guided Conservative Propagation for Structured Inference in Vessel Segmentation](/202605/27/2605.20543v1-uncertainty-guided-conservative-propagation-for-structured-inference-in-vessel-segmentation)  
    标签：评分：9.0/10、query:mit
-   evidence：使用BLIP-2进行视觉-语言对齐，SAM用于医学分割，直接应用SAM。
-11. [Geometry-Aware Uncertainty Coresets for Robust Visual In-Context Learning in Histopathology](/20260518-20260527/2605.18419v1-geometry-aware-uncertainty-coresets-for-robust-visual-in-context-learning-in-histopathology)  
+   evidence：提出不确定性引导的保守传播(UGCP)通用血管分割模块，属于医学图像分割前沿方法。
+7. [Look-Closer-Then-Diagnose: Confidence-Aware Ultrasound VQA via Active Zooming](/202605/27/2605.21652v2-look-closer-then-diagnose-confidence-aware-ultrasound-vqa-via-active-zooming)  
    标签：评分：9.0/10、query:mit
-   evidence：几何感知核心集选择用于组织病理学VLM的鲁棒上下文学习
-12. [Benchmarking transferability of SSL pretraining to same and different modality segmentation tasks](/20260518-20260527/2605.18491v1-benchmarking-transferability-of-ssl-pretraining-to-same-and-different-modality-segmentation-tasks)  
+   evidence：提出具有主动放大的置信度感知超声视觉问答框架，用于医学图像理解
+8. [ConvNeXt-FD: A Fractal-Based Deep Model for Robust Biomedical Image Segmentation](/202605/27/2605.22002v1-convnext-fd-a-fractal-based-deep-model-for-robust-biomedical-image-segmentation)  
    标签：评分：9.0/10、query:mit
-   evidence：基准测试九种自监督方法在医学图像分割上的跨模态迁移性
-13. [Concept-Guided Noisy Negative Suppression for Zero-Shot Classification and Grounding of Chest X-Ray Findings](/20260518-20260527/2605.19374v1-concept-guided-noisy-negative-suppression-for-zero-shot-classification-and-grounding-of-chest-x-ray-findings)  
+   evidence：提出基于分形维度的ConvNeXt-FD深度模型，用于鲁棒的生物医学图像分割
+9. [GLeVE: Graph-Guided Lesion Grounding with Proposal Verification in 3D CT](/202605/27/2605.22619v1-gleve-graph-guided-lesion-grounding-with-proposal-verification-in-3d-ct)  
    标签：评分：9.0/10、query:mit
-   evidence：针对胸部X光片的视觉-语言对齐用于零样本分类与定位
-14. [Generation of Heterogeneous PET Images from Uniform Organ Activity Maps Using a Pretrained Domain-Adapted Diffusion Model](/20260518-20260527/2605.20267v1-generation-of-heterogeneous-pet-images-from-uniform-organ-activity-maps-using-a-pretrained-domain-adapted-diffusion-model)  
+   evidence：图引导病灶定位将放射报告与3D CT对齐
+10. [The Double Dilemma in Multi-Task Radiology Report Generation: A Gradient Dynamics Analysis and Solution](/202605/27/2605.22635v1-the-double-dilemma-in-multi-task-radiology-report-generation-a-gradient-dynamics-analysis-and-solution)  
    标签：评分：9.0/10、query:mit
-   evidence：扩散模型从器官活动图生成异质PET图像
-15. [MedCRP-CL: Continual Medical Image Segmentation via Bayesian Nonparametric Semantic Modality Discovery](/20260518-20260527/2605.20297v1-medcrp-cl-continual-medical-image-segmentation-via-bayesian-nonparametric-semantic-modality-discovery)  
+   evidence：分析多任务放射学报告生成中的梯度动力学，属于视觉-语言医学任务。
+11. [SliceWorld: A Predictive and Controllable World-State Model for CT Report Generation](/202605/27/2605.24371v1-sliceworld-a-predictive-and-controllable-world-state-model-for-ct-report-generation)  
    标签：评分：9.0/10、query:mit
-   evidence：医学图像分割的持续学习
-16. [A Human-in-the-Loop Framework for Efficient Prompt Selection in Microscopy Vision-Language Models](/20260518-20260527/2605.20495v1-a-human-in-the-loop-framework-for-efficient-prompt-selection-in-microscopy-vision-language-models)  
+   evidence：提出用于CT报告生成的世界状态模型，属于视觉-语言医学影像理解
+12. [GlobalDentBench: A Multinational Benchmark for Evaluating LLM Clinical Reasoning in Dentistry with Expert Calibration](/202605/27/2605.24636v2-globaldentbench-a-multinational-benchmark-for-evaluating-llm-clinical-reasoning-in-dentistry-with-expert-calibration)  
+   标签：评分：9.0/10、query:dj
+   evidence：评估大型语言模型在牙科临床推理的跨国基准
+13. [Parameter-Efficient VLMs for Gastrointestinal Endoscopy: Medical Image Generation and Clinical Visual Question Answering](/202605/27/2605.24792v1-parameter-efficient-vlms-for-gastrointestinal-endoscopy-medical-image-generation-and-clinical-visual-question-answering)  
    标签：评分：9.0/10、query:mit
-   evidence：人机协同提示选择用于显微镜视觉语言模型分类，减少标注工作量。
-17. [Gaze into the Details: Locality-Sensitive Enhancement for OCTA Retinal Vessel Segmentation](/20260518-20260527/2605.20651v1-gaze-into-the-details-locality-sensitive-enhancement-for-octa-retinal-vessel-segmentation)  
+   evidence：参数高效视觉语言模型用于消化内镜视觉问答与图像生成
+14. [Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models](/202605/27/2605.24977v1-universal-boosts-specific-suppressors-sparse-autoencoder-steering-of-medical-vision-language-models)  
    标签：评分：9.0/10、query:mit
-   evidence：提出LSENet，通过局部敏感模块改进OCTA血管分割，是医学图像分割的直接进展
-18. [HyDAR-Pano3D: A Hybrid Disentangled Anatomical Recovery Framework for Panoramic-to-3D Reconstruction](/20260518-20260527/2605.20827v1-hydar-pano3d-a-hybrid-disentangled-anatomical-recovery-framework-for-panoramic-to-3d-reconstruction)  
-   标签：评分：9.0/10、query:di
-   evidence：基于AI的牙科全景X射线三维重建
-19. [An Open Multi-Center Whole-Body FDG PET/CT Foundation Model for Tumor Segmentation](/20260518-20260527/2605.21835v1-an-open-multi-center-whole-body-fdg-petct-foundation-model-for-tumor-segmentation)  
+   evidence：通过稀疏自编码器引导改进医学视觉语言模型用于胸部X线报告生成
+15. [Evi-Steer: Learning to Steer Biomedical Vision-Language Models through Efficient and Generalizable Evidential Tuning](/202605/27/2605.26292v1-evi-steer-learning-to-steer-biomedical-vision-language-models-through-efficient-and-generalizable-evidential-tuning)  
    标签：评分：9.0/10、query:mit
-   evidence：开源的PET/CT肿瘤分割基础模型
-20. [Learning Emergent Modular Representations in Multi-modality Medical Vision Foundation Models](/20260518-20260527/2605.21861v1-learning-emergent-modular-representations-in-multi-modality-medical-vision-foundation-models)  
+   evidence：对BiomedCLIP进行高效且不确定性感知的微调，用于生物医学视觉语言任务
+16. [MedVol-R1: Reward-Driven Evidence Grounding for Volumetric Reasoning Segmentation](/202605/27/2605.26621v1-medvol-r1-reward-driven-evidence-grounding-for-volumetric-reasoning-segmentation)  
    标签：评分：9.0/10、query:mit
-   evidence：提出用于多模态医学视觉基础模型的模块化网络
-21. [Universal CT Representations from Anatomy to Disease Phenotype through Agglomerative Pretraining](/20260518-20260527/2605.21906v1-universal-ct-representations-from-anatomy-to-disease-phenotype-through-agglomerative-pretraining)  
-   标签：评分：9.0/10、query:mit
-   evidence：训练于26万CT体积的基础模型
-22. [D3Seg: Dependency-Aware Diffusion for Brain Tumor Segmentation with Missing Modalities](/20260518-20260527/2605.22249v1-d3seg-dependency-aware-diffusion-for-brain-tumor-segmentation-with-missing-modalities)  
-   标签：评分：9.0/10、query:mit
-   evidence：提出基于扩散的脑肿瘤分割模型，解决缺失模态问题，推进医学图像分割。
-23. [How can reasoning capability empower the AI copilot robot in endoscopic surgery](/20260518-20260527/2605.22322v1-how-can-reasoning-capability-empower-the-ai-copilot-robot-in-endoscopic-surgery)  
-   标签：评分：9.0/10、query:mit
-   evidence：内窥镜手术中基于视觉-语言-动作模型的AI副驾驶机器人匹配医学图像理解的视觉语言模型。
-24. [MedExpMem: Adapting Experience Memory for Differential Diagnosis](/20260518-20260527/2605.22872v1-medexpmem-adapting-experience-memory-for-differential-diagnosis)  
-   标签：评分：9.0/10、query:mit
-   evidence：提出经验记忆框架，使VLM诊断代理积累鉴别诊断经验
-25. [RoboSurg-VQA: A Multimodal Benchmark for Surgical Segmentation-Aware Visual Question Answering](/20260518-20260527/2605.23068v1-robosurg-vqa-a-multimodal-benchmark-for-surgical-segmentation-aware-visual-question-answering)  
-   标签：评分：9.0/10、query:mit
-   evidence：手术多模态VQA基准与医学图像理解的视觉语言模型一致。
-26. [PathNavigate: A Training-Free Pathology Agent with Surprise-Guided Scan and Shared Slide Memory for Whole-Slide Image VQA](/20260518-20260527/2605.23559v1-pathnavigate-a-training-free-pathology-agent-with-surprise-guided-scan-and-shared-slide-memory-for-whole-slide-image-vqa)  
-   标签：评分：9.0/10、query:mit
-   evidence：一种用于病理全切片图像视觉问答的无训练代理，实现视觉语言交互
-27. [Task-Aligned Self-Supervised Learning for Medical Image Analysis: A Systematic Review and Practical Design Guidelines](/20260518-20260527/2605.23995v1-task-aligned-self-supervised-learning-for-medical-image-analysis-a-systematic-review-and-practical-design-guidelines)  
-   标签：评分：9.0/10、query:mit
-   evidence：自监督学习在医学图像分析中的系统综述直接匹配自监督的医学图像分割方法。
-28. [ImPartial: Multi-channel Whole-Cell Segmentation using Partial Annotations](/20260518-20260527/2605.24128v1-impartial-multi-channel-whole-cell-segmentation-using-partial-annotations)  
-   标签：评分：9.0/10、query:mit
-   evidence：使用部分标注和自监督填补的半监督细胞分割
-29. [Med-R2: An Adversarial Benchmark for Evidence-Grounded Reasoning in Medical VLMs](/20260518-20260527/2605.24492v1-med-r2-an-adversarial-benchmark-for-evidence-grounded-reasoning-in-medical-vlms)  
-   标签：评分：9.0/10、query:mit
-   evidence：评估医学VLM的证据基础推理和鲁棒性的基准。
-30. [SpikeReg: Energy-Efficient 3D Deformable Medical Image Registration with Spiking Neural Networks](/20260518-20260527/2605.25144v1-spikereg-energy-efficient-3d-deformable-medical-image-registration-with-spiking-neural-networks)  
-   标签：评分：9.0/10、query:mit
-   evidence：脉冲神经网络用于可变形的3D脑MRI配准
-31. [Anatomy-Anchored Self-Supervision: Distilling Vision Foundation Models for Invariant Ultrasound Representation](/20260518-20260527/2605.25402v1-anatomy-anchored-self-supervision-distilling-vision-foundation-models-for-invariant-ultrasound-representation)  
-   标签：评分：9.0/10、query:mit
-   evidence：自监督超声表征学习，通过解剖锚定用于分割
-32. [Are We Overconfident in Models and Results for Semi-Supervised 3D Medical Image Segmentation?](/20260518-20260527/2605.25561v1-are-we-overconfident-in-models-and-results-for-semi-supervised-3d-medical-image-segmentation)  
-   标签：评分：9.0/10、query:mit
-   evidence：半监督3D医学图像分割存在的过度自信问题
-33. [EchoPilot: Training-Free Ultrasound Video Segmentation via Scale-Space Semantic Prompting and Reliability-Gated Memory](/20260518-20260527/2605.25944v1-echopilot-training-free-ultrasound-video-segmentation-via-scale-space-semantic-prompting-and-reliability-gated-memory)  
-   标签：评分：9.0/10、query:mit
-   evidence：利用SAM和医学VLM实现无训练超声视频分割
-34. [A Multimodal 3D Foundation Model for Light Sheet Fluorescence Microscopy Enables Few-Shot Segmentation, Classification, and Deblurring](/20260518-20260527/2605.26026v1-a-multimodal-3d-foundation-model-for-light-sheet-fluorescence-microscopy-enables-few-shot-segmentation-classification-and-deblurring)  
-   标签：评分：9.0/10、query:mit
-   evidence：光片荧光显微镜的3D基础模型直接匹配医学影像基础模型。
+   evidence：视觉语言模型用于体积推理分割，强化学习进行证据定位
 
 ### 速读区论文标签
-1. [Beyond Euclidean Prototypes: Spectral Disentanglement and Geodesic Matching for Few-Shot Medical Image Segmentation](/20260518-20260527/2605.17904v1-beyond-euclidean-prototypes-spectral-disentanglement-and-geodesic-matching-for-few-shot-medical-image-segmentation)  
+1. [Vision Harnessing Agent for Open Ad-hoc Segmentation](/202605/27/2605.19410v1-vision-harnessing-agent-for-open-ad-hoc-segmentation)  
    标签：评分：8.0/10、query:mit
-   evidence：提出用于少样本医学图像分割的谱解缠与测地线匹配方法
-2. [MedFM-Robust: Benchmarking Robustness of Medical Foundation Models](/20260518-20260527/2605.19027v2-medfm-robust-benchmarking-robustness-of-medical-foundation-models)  
+   evidence：提出利用VLM智能体进行即时分割，可迁移到医学图像理解的视觉语言模型
+2. [Disentangling Sampling from Training Budget in Class-Imbalanced CT Body Composition Segmentation](/202605/27/2605.20405v1-disentangling-sampling-from-training-budget-in-class-imbalanced-ct-body-composition-segmentation)  
    标签：评分：8.0/10、query:mit
-   evidence：对包括SAM和医学视觉语言模型在内的医学基础模型进行鲁棒性基准测试
-3. [Physics-Informed Graph Neural Network Surrogates for Turbulent Nanoparticle Dispersion in Dental Clinical Environments](/20260518-20260527/2605.19589v1-physics-informed-graph-neural-network-surrogates-for-turbulent-nanoparticle-dispersion-in-dental-clinical-environments)  
-   标签：评分：8.0/10、query:dj
-   evidence：牙科诊所气溶胶模拟的AI代理模型匹配临床牙科AI应用。
-4. [WoundFormer: Multi-Scale Spatial Feature Fusion for Multi-Class Wound Tissue Segmentation](/20260518-20260527/2605.19868v1-woundformer-multi-scale-spatial-feature-fusion-for-multi-class-wound-tissue-segmentation)  
+   evidence：情景采样用于类别不平衡CT分割
+3. [SurgOnAir: Hierarchy-Aware Real-Time Surgical Video Commentary](/202605/27/2605.21132v1-surgonair-hierarchy-aware-real-time-surgical-video-commentary)  
    标签：评分：8.0/10、query:mit
-   evidence：提出基于Transformer的多类别伤口组织分割框架
-5. [Cardiac fat segmentation using computed tomography and an image-to-image conditional generative adversarial neural network](/20260518-20260527/2605.20064v1-cardiac-fat-segmentation-using-computed-tomography-and-an-image-to-image-conditional-generative-adversarial-neural-network)  
+   evidence：流式视觉语言模型实现实时手术视频解说
+4. [Soft Tuy-Completeness for Robust Projection Selection in Cone-Beam CT](/202605/27/2605.24023v1-soft-tuy-completeness-for-robust-projection-selection-in-cone-beam-ct)  
+   标签：评分：8.0/10、query:di
+   evidence：软Tuy完备性用于锥束CT投影选择
+5. [VesselSim: learning 3D blood vessel segmentation without expert annotations](/202605/27/2605.26277v1-vesselsim-learning-3d-blood-vessel-segmentation-without-expert-annotations)  
    标签：评分：8.0/10、query:mit
-   evidence：利用条件生成对抗网络进行CT图像心脏脂肪分割
-6. [LiFT: Lifted Inter-slice Feature Trajectories for 3D Image Generation from 2D Generators](/20260518-20260527/2605.19060v1-lift-lifted-inter-slice-feature-trajectories-for-3d-image-generation-from-2d-generators)  
+   evidence：通过模拟学习3D血管分割无需专家标注
+6. [Benchmarking Convolutional, Transformer, Hybrid, and Vision Language Models for Multi Disease Retinal Screening](/202605/27/2605.26283v1-benchmarking-convolutional-transformer-hybrid-and-vision-language-models-for-multi-disease-retinal-screening)  
+   标签：评分：8.0/10、query:mit
+   evidence：评估视觉语言模型在视网膜疾病筛查中的表现
+7. [A multifractal-based masked auto-encoder: an application to medical images](/202605/27/2605.26287v1-a-multifractal-based-masked-auto-encoder-an-application-to-medical-images)  
+   标签：评分：8.0/10、query:mit
+   evidence：提出多重分形优化掩码自编码器(MO-MAE)，用于医学图像分类的自监督基础模型预训练。
+8. [Detail Consistent Stage-Wise Distillation for Efficient 3D MRI Segmentation](/202605/27/2605.26382v1-detail-consistent-stage-wise-distillation-for-efficient-3d-mri-segmentation)  
+   标签：评分：8.0/10、query:mit
+   evidence：高效三维医学图像分割的蒸馏方法
+9. [Local-sensitive connectivity filter (ls-cf): A post-processing unsupervised improvement of the frangi, hessian and vesselness filters for multimodal vessel segmentation](/202605/27/2605.21251v1-local-sensitive-connectivity-filter-ls-cf-a-post-processing-unsupervised-improvement-of-the-frangi-hessian-and-vesselness-filters-for-multimodal-vessel-segmentation)  
    标签：评分：7.0/10、query:mit
-   evidence：通过提升特征轨迹从2D生成器生成3D医学图像
-7. [ELEMENT: Multi-Modal Retinal Vessel Segmentation Based on a Coupled Region Growing and Machine Learning Approach](/20260518-20260527/2605.20458v1-element-multi-modal-retinal-vessel-segmentation-based-on-a-coupled-region-growing-and-machine-learning-approach)  
+   evidence：无监督血管分割滤波器改进
+10. [Real time monitoring of pressure-induced deformation of PDMS to evaluate pressure distribution in microfluidic channels](/202605/27/2605.23729v1-real-time-monitoring-of-pressure-induced-deformation-of-pdms-to-evaluate-pressure-distribution-in-microfluidic-channels)  
+   标签：评分：7.0/10、query:organ-chip
+   evidence：用于器官芯片的微流控通道压力传感方法
+11. [CLIP-Guided SAM: Parameter-Efficient Semantic Conditioning for Promptable Segmentation](/202605/27/2605.24807v1-clip-guided-sam-parameter-efficient-semantic-conditioning-for-promptable-segmentation)  
    标签：评分：7.0/10、query:mit
-   evidence：使用机器学习进行多模态视网膜血管分割
-8. [VISTA: Validation-Guided Integration of Spatial and Temporal Foundation Models with Anatomical Decoding for Rare-Pathology VCE Event Detection -- after competition results](/20260518-20260527/2605.22096v1-vista-validation-guided-integration-of-spatial-and-temporal-foundation-models-with-anatomical-decoding-for-rare-pathology-vce-event-detection----after-competition-results)  
-   标签：评分：7.0/10、query:mit
-   evidence：整合基础模型用于胶囊内镜医学事件检测
-9. [The Double Dilemma in Multi-Task Radiology Report Generation: A Gradient Dynamics Analysis and Solution](/20260518-20260527/2605.22635v2-the-double-dilemma-in-multi-task-radiology-report-generation-a-gradient-dynamics-analysis-and-solution)  
-   标签：评分：7.0/10、query:mit
-   evidence：多任务放射学报告生成的梯度动力学分析
-10. [From Theory to Decision Rule: Calibrating the Noisy-Label Crossover for Vision-Language Model Weak Supervision Across Three Medical-Imaging Benchmarks](/20260518-20260527/2605.24771v1-from-theory-to-decision-rule-calibrating-the-noisy-label-crossover-for-vision-language-model-weak-supervision-across-three-medical-imaging-benchmarks)  
-   标签：评分：7.0/10、query:mit
-   evidence：使用BiomedCLIP生成弱标签并校准其在医学影像上的噪声标签交叉点，研究VLM用于标注。
-11. [Speech-Guided Multimodal Learning for Vocal Tract Segmentation in Real-Time MRI](/20260518-20260527/2605.18466v1-speech-guided-multimodal-learning-for-vocal-tract-segmentation-in-real-time-mri)  
+   evidence：通过CLIP语义条件增强SAM，推进可提示分割方法，可用于医学影像
+12. [Entropy-Guided Self-Supervised Learning for Medical Image Classification](/202605/27/2605.21970v1-entropy-guided-self-supervised-learning-for-medical-image-classification)  
    标签：评分：6.0/10、query:mit
-   evidence：利用语音引导的多模态学习进行实时MRI声道分割
-12. [D-Convexity: A Unified Differentiable Convex Shape Prior via Quasi-Concavity for Data-driven Image Segmentation](/20260518-20260527/2605.19210v1-d-convexity-a-unified-differentiable-convex-shape-prior-via-quasi-concavity-for-data-driven-image-segmentation)  
+   evidence：用于医学图像分类的熵引导自监督学习方法，可迁移至分割
+13. [Radiuma: A Unified Zero-Code Executable Graphical Workflow Generator for Reproducible and Shareable Medical Image Analysis and Machine Learning](/202605/27/2605.24201v1-radiuma-a-unified-zero-code-executable-graphical-workflow-generator-for-reproducible-and-shareable-medical-image-analysis-and-machine-learning)  
    标签：评分：6.0/10、query:mit
-   evidence：可微分凸形状先验用于分割网络，可用于医学图像分割。
-13. [Thinking in Scales: Accelerating Gigapixel Pathology Image Analysis via Adaptive Continuous Reasoning](/20260518-20260527/2605.19491v1-thinking-in-scales-accelerating-gigapixel-pathology-image-analysis-via-adaptive-continuous-reasoning)  
+   evidence：提供集成分割、配准、影像组学的模块化平台，支持医学图像分析的可重复性。
+14. [Beyond Generative Priors: Minority Sampling with JEPA-Guided Diffusion](/202605/27/2605.24631v1-beyond-generative-priors-minority-sampling-with-jepa-guided-diffusion)  
    标签：评分：6.0/10、query:mit
-   evidence：提出一种针对千兆像素病理全切片图像的令牌高效连续推理模型，推动医学图像分析
-14. [Entropy-Guided Self-Supervised Learning for Medical Image Classification](/20260518-20260527/2605.21970v1-entropy-guided-self-supervised-learning-for-medical-image-classification)  
+   evidence：JEPA引导扩散用于少数样本生成，可应用于医学诊断
+15. [Self-Supervised Contrastive Learning for Cardiac MR Sequence Classification](/202605/27/2605.24789v1-self-supervised-contrastive-learning-for-cardiac-mr-sequence-classification)  
    标签：评分：6.0/10、query:mit
-   evidence：基于熵引导掩码自编码器的自监督学习用于医学图像分类
-15. [ConceptM$^3$oE: Concept-Guided Multimodal Mixture of Experts for Interpretable Computational Pathology](/20260518-20260527/2605.24399v1-conceptm3oe-concept-guided-multimodal-mixture-of-experts-for-interpretable-computational-pathology)  
-   标签：评分：6.0/10、query:mit
-   evidence：多模态诊断模型结合图像和报告，利用混合专家实现可解释性，与VLM理解相关。
+   evidence：自监督对比学习用于医学图像适配
 
 
 <div class="dpr-home-promo-card">
