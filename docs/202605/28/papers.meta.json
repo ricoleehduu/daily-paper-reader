@@ -1,0 +1,24 @@
+{
+  "label": "2026-05-28",
+  "date": "2026-05-28",
+  "generated_at": "2026-05-28T22:31:45",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202605/28/2605.26726v1-measuring-prediction-uncertainty-in-neural-cellular-automata",
+      "section": "deep",
+      "title_en": "Measuring Prediction Uncertainty in Neural Cellular Automata",
+      "authors": "Ario Sadafi, Michael Deutges, Nassir Navab, Carsten Marr",
+      "date": "2026-05-26",
+      "pdf": "https://arxiv.org/pdf/2605.26726v1",
+      "score": "8.0",
+      "evidence": "研究基于神经细胞自动机的医学图像分割不确定性估计",
+      "tldr": "针对神经细胞自动机在医学图像分割中预测可信度难以判断的问题，提出一种名为resilience的不确定性度量方法，通过扰动检测最终预测的稳定性来衡量置信度，为轻量级分割模型提供了实用的不确定性评估工具。",
+      "tags": "query:mit",
+      "abstract_en": "Neural cellular automata (NCA) provide a lightweight alternative to encoder-decoder segmentation networks. However, it can be difficult to decide when a prediction should be trusted. Here, we study uncertainty estimation for NCA-based medical image segmentation without modifying the underlying architecture or retraining the model. Our approach is motivated by viewing the NCA as a dynamical system where convergent attractors correspond to confident predictions. Concretely, we propose resilience, a simple measure that leverages the intrinsic iterative structure of NCAs by probing the stability of the final prediction under small perturbations of the automaton state. Predictions that return to the same solution are deemed confident, while those that change substantially are flagged as uncertain. We evaluate uncertainty by its ability to predict segmentation quality using selective prediction metrics ($Δ$Dice@90 and AURC) and ranking metrics (AUROC and AUPRC). Across multiple medical segmentation benchmarks, resilience identifies failure cases more reliably than baselines, improving trust and safety in NCA-based models.",
+      "source": "arxiv",
+      "selection_source": "carryover_cache"
+    }
+  ],
+  "errors": []
+}

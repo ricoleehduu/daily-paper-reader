@@ -1,80 +1,30 @@
 {
-  "generated_at": "2026-05-27T21:17:18.583537+00:00",
-  "updated_date": "20260527",
+  "generated_at": "2026-05-28T22:30:23.683170+00:00",
+  "updated_date": "20260528",
   "carryover_days": 9,
   "tag_states": {
     "di": {
-      "updated_date": "20260527",
+      "updated_date": "20260528",
       "carryover_days": 9,
       "items": []
     },
     "mit": {
-      "updated_date": "20260527",
+      "updated_date": "20260528",
       "carryover_days": 9,
-      "items": [
-        {
-          "id": "2605.26726v1",
-          "source": "arxiv",
-          "title": "Measuring Prediction Uncertainty in Neural Cellular Automata",
-          "abstract": "Neural cellular automata (NCA) provide a lightweight alternative to encoder-decoder segmentation networks. However, it can be difficult to decide when a prediction should be trusted. Here, we study uncertainty estimation for NCA-based medical image segmentation without modifying the underlying architecture or retraining the model. Our approach is motivated by viewing the NCA as a dynamical system where convergent attractors correspond to confident predictions. Concretely, we propose resilience, a simple measure that leverages the intrinsic iterative structure of NCAs by probing the stability of the final prediction under small perturbations of the automaton state. Predictions that return to the same solution are deemed confident, while those that change substantially are flagged as uncertain. We evaluate uncertainty by its ability to predict segmentation quality using selective prediction metrics ($Δ$Dice@90 and AURC) and ranking metrics (AUROC and AUPRC). Across multiple medical segmentation benchmarks, resilience identifies failure cases more reliably than baselines, improving trust and safety in NCA-based models.",
-          "authors": [
-            "Ario Sadafi",
-            "Michael Deutges",
-            "Nassir Navab",
-            "Carsten Marr"
-          ],
-          "primary_category": "eess.IV",
-          "categories": [
-            "eess.IV",
-            "cs.AI",
-            "cs.CV"
-          ],
-          "published": "2026-05-26T09:05:03+00:00",
-          "link": "https://arxiv.org/pdf/2605.26726v1",
-          "tags": [
-            "keyword:di",
-            "keyword:dj",
-            "keyword:mit",
-            "keyword:organ-chip",
-            "keyword:top-journals",
-            "query:di",
-            "query:dj",
-            "query:mit",
-            "query:organ-chip",
-            "query:top-journals"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Studies uncertainty estimation for NCA-based medical image segmentation",
-          "llm_evidence_cn": "研究基于神经细胞自动机的医学图像分割不确定性估计",
-          "llm_evidence": "研究基于神经细胞自动机的医学图像分割不确定性估计",
-          "canonical_evidence": "研究基于神经细胞自动机的医学图像分割不确定性估计",
-          "llm_tldr_en": "Proposes resilience, an uncertainty measure for NCA-based medical image segmentation that probes prediction stability under perturbations.",
-          "llm_tldr_cn": "针对神经细胞自动机在医学图像分割中预测可信度难以判断的问题，提出一种名为resilience的不确定性度量方法，通过扰动检测最终预测的稳定性来衡量置信度，为轻量级分割模型提供了实用的不确定性评估工具。",
-          "llm_tldr": "针对神经细胞自动机在医学图像分割中预测可信度难以判断的问题，提出一种名为resilience的不确定性度量方法，通过扰动检测最终预测的稳定性来衡量置信度，为轻量级分割模型提供了实用的不确定性评估工具。",
-          "llm_tags": [
-            "query:mit"
-          ],
-          "matched_query_tag": "query:mit",
-          "matched_query_text": "latest advances in medical image segmentation",
-          "matched_requirement_id": "req-14",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.26726v1",
-          "carry_days": 1
-        }
-      ]
+      "items": []
     },
     "top-journals": {
-      "updated_date": "20260527",
+      "updated_date": "20260528",
       "carryover_days": 9,
       "items": []
     },
     "organ-chip": {
-      "updated_date": "20260527",
+      "updated_date": "20260528",
       "carryover_days": 9,
       "items": []
     },
     "dj": {
-      "updated_date": "20260527",
+      "updated_date": "20260528",
       "carryover_days": 9,
       "items": []
     }

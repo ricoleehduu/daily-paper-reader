@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-05-28 <!--dpr-date:20260528-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/28/2605.26726v1-measuring-prediction-uncertainty-in-neural-cellular-automata" data-sidebar-item="{&quot;title&quot;: &quot;Measuring Prediction Uncertainty in Neural Cellular Automata&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.26726v1-measuring-prediction-uncertainty-in-neural-cellular-automata&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;mit&quot;}], &quot;evidence&quot;: &quot;研究基于神经细胞自动机的医学图像分割不确定性估计&quot;}">Measuring Prediction Uncertainty in Neural Cellular Automata</a>
   * 2026-05-27 <!--dpr-date:20260527-->
     * 精读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202605/27/2605.22572v1-segguidednet-sub-region-aware-attention-supervision-for-interpretable-brain-tumor-segmentation" data-sidebar-item="{&quot;title&quot;: &quot;SegGuidedNet: Sub-Region-Aware Attention Supervision for Interpretable Brain Tumor Segmentation&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2605.22572v1-segguidednet-sub-region-aware-attention-supervision-for-interpretable-brain-tumor-segmentation&quot;, &quot;score&quot;: &quot;10.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;mit&quot;}], &quot;evidence&quot;: &quot;提出一种新的带注意监督的脑肿瘤分割方法，推进医学图像分割&quot;}">SegGuidedNet: Sub-Region-Aware Attention Supervision for Interpretable Brain Tumor Segmentation</a>
