@@ -6,23 +6,19 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-05-28
-- 运行时间：2026-05-28 22:31:37 UTC
+- 最新运行日期：2026-05-29
+- 运行时间：2026-05-29 22:33:33 UTC
 - 运行状态：成功
-- 本次总论文数：1
-- 精读区：1
+- 本次总论文数：0
+- 精读区：0
 - 速读区：0
 
 ### 今日简报（AI）
-- 今日共生成 1 篇推荐（精读 1 篇，速读 0 篇）
-- 精读：《Measuring Prediction Uncertainty in Neural Cellular Automata》（8.0/10）
-- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202605/28/README](/202605/28/README)
+> 今日无新推荐，系统未产出可展示论文。
+- 详情：[/202605/29/README](/202605/29/README)
 
 ### 精读区论文标签
-1. [Measuring Prediction Uncertainty in Neural Cellular Automata](/202605/28/2605.26726v1-measuring-prediction-uncertainty-in-neural-cellular-automata)  
-   标签：评分：8.0/10、query:mit
-   evidence：研究基于神经细胞自动机的医学图像分割不确定性估计
+- 本次无精读推荐。
 
 ### 速读区论文标签
 - 本次无速读推荐。
