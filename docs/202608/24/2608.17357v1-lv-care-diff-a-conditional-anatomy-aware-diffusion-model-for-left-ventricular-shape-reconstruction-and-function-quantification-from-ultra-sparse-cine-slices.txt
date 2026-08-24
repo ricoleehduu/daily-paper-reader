@@ -1,0 +1,380 @@
+Title: 2608.17357v1.pdf
+
+URL Source: https://arxiv.org/pdf/2608.17357v1
+
+Published Time: Wed, 19 Aug 2026 00:29:33 GMT
+
+Number of Pages: 55
+
+Markdown Content:
+LV-CARE-Diff: A Conditional Anatomy-Aware Diffusion Model for Left Ventricular Shape Reconstruction and Function Quantification from Ultra-Sparse Cine Slices 
+
+Xinwang Li 1# , Yu Lian 1# , Bowei Liu 2, Yifei Jiang 1, Jingjing Xiao 3, Haiyan Ding 2,Xiangchuang Kong 4,5,6 , Rui Guo 1* 1School of Medical Science and Engineering, Beijing Institute of Technology, Beijing, China 
+
+> 2
+
+Center for Biomedical Imaging Research, School of Biomedical Engineering, Tsinghua University, Beijing, China 
+
+> 3
+
+Bio-Med Informatics Research Centre and Clinical Research Centre, Xinqiao Hospital, Army Medical University, Chongqing, China 
+
+> 4
+
+Department of Radiology, Union Hospital, Tongji Medical College, Huazhong University of Science and Technology, Wuhan, China 
+
+> 5
+
+Hubei Provincial Clinical Research Center for Precision Radiology & Interventional Medicine, Wuhan, China 
+
+> 6
+
+Hubei Province Key Laboratory of Molecular Imaging, Wuhan, China _________________________________________________________ 
+
+Type: Research article 
+
+Word Count: 5500 
+
+Figures: 11 
+
+Tables: 2
+
+> #
+
+Xinwang Li and Yu Lian contributed equally to this study and share co-first authorship. Address for correspondence :
+
+Rui Guo 
+
+E-mail: ruiguo.ok@163.com School of Medical Science and Engineering, Beijing Institute of Technology, Beijing, China Abstract(<250 words) 
+
+Left ventricular functional quantification is an essential examination and is routinely performed using cardiovascular magnetic resonance (CMR) cine imaging. However, conventional CMR cine protocols require the acquisition of multiple short-axis (SAX) slices to cover the entire left ventricle (LV) along with two long-axis (LAX) slices, which is time-consuming and places a considerable burden on patients who are unable to sustain repeated breath-holds, limiting its suitability for large-scale early screening. In this study, a Conditional Anatomy-Aware Diffusion Model (LV-CARE-Diff) was developed using a coarse-to-fine strategy to reconstruct the complete LV shape from ultra-sparse cine slices, namely three short-axis and two long-axis slices, with the aim of accelerating CMR cine examination. LV-CARE-Diff employs a 3DUNet to generate a coarse initial shape, which is subsequently refined through a residual diffusion model. A condition-guided input incorporating imaging plane orientation and positional metadata was constructed to enable spatial awareness, and amulti-objective training strategy jointly supervising shape, function, and anatomy was incorporated to guide high-fidelity reconstruction. LV-CARE-Diff was compared against a standalone 3DUNet, a standalone diffusion model, and a 3D UNet with diffusion-based refinement. Testing results indicated that complete LV shape could be robustly reconstructed by all deep learning models, with the highest reconstruction performance achieved by the proposed LV-CARE-Diff. Deep learning models reconstructing LV shape from sparse cine slices preserved 96% of functional quantification accuracy while reducing imaging time by 73%. The LV-CARE-Diff framework established in this study enables ultra-sparse cine acquisition to shorten CMR examination duration without sacrificing quantitative functional accuracy.  
+
+> Keywords (1 to 7): 3D left ventricle shape reconstruction, sparse cine slices, diffusion model, CMR acceleration
+
+Highlights (3 bullet points) 
+
+ A Conditional Anatomy-Aware Diffusion Model was developed to reconstruct the complete left ventricular shape from three short-axis and two long-axis cine slices, providing a deep learning solution for accelerating cardiovascular magnetic resonance cine examination. 
+
+ A coarse-to-fine reconstruction strategy was adopted, in which a 3D convolutional neural network generates an initial coarse left ventricular shape that is subsequently refined by a residual diffusion model to yield the final reconstruction. 
+
+ A condition-guided spatial input encoding the observed slices was combined with a multi-objective training strategy jointly supervising shape, function, and anatomy to drive high-fidelity left ventricular shape reconstruction. INTRODUCTION 
+
+Heart disease remains the leading cause of death worldwide. In the United States, approximately 6.7 million adults over the age of 20 are living with heart failure (HF), and prevalence is projected to rise to 8.5 million by 2030. The lifetime risk of developing HF has reached 24%, meaning nearly one in four individuals will be affected over their lifetime (1). In China, the prevalence stands at approximately 1,000 per 100,000 individuals (2). Cardiovascular magnetic resonance (CMR) cine imaging is the gold-standard technique for assessing wall motion abnormalities, cardiac morphology, and ventricular function, playing a pivotal role in the diagnosis, risk stratification, and management of patients with reduced ejection fraction (3,4). 
+
+Compared with other imaging modalities, CMR cine offers superior reliability for detecting early subclinical dysfunction, particularly in high-risk populations such as patients with diabetes, hypertension, or a history of chemotherapy, and is therefore well suited to long-term longitudinal monitoring (3,5,6). 
+
+In clinical practice, two-dimensional (2D) retrospective electrocardiogram (ECG)-gated segmented cine is the most widely used technique and is performed in virtually every CMR examination (7,8). To achieve adequate spatial and temporal resolution, data for a single 2D slice are acquired over multiple cardiac cycles during a breath-hold. For complete left ventricular (LV) coverage, a dense stack of 10-15 short-axis (SAX) slices together with two long-axis (LAX) views is required, resulting in 8-10 minutes of acquisition time within an approximately 40-minute routine examination (9,10). This substantial scan time reduces overall efficiency, increases cost and patient burden, and consequently impedes large-scale early screening. Although the breath-hold duration per slice is generally tolerable for most patients, repeated breath-holding can be demanding for elderly individuals or those with respiratory comorbidities (11). There is therefore a clear clinical need for methods that can shorten cine acquisition and, by extension, the entire routine CMR examination, in order to reduce patient burden (12) and to enable earlier screening (4). 
+
+On the imaging acceleration front, single-beat cine has been explored and validated alongside advances in MRI reconstruction techniques (13-15). In contrast to segmented cine, single-beat cine captures all cardiac phases within a single heartbeat, enabling complete ventricular coverage within a single breath-hold or even under free-breathing conditions. However, the aggressive undersampling required inevitably compromises spatial and temporal resolution relative to conventional multi-beat acquisitions. Residual aliasing artifacts and blurring can impair the delineation of fine myocardial structures and the accurate assessment of LV function (13-15). 
+
+Consequently, broad clinical adoption of single-beat cine still requires advances in reconstruction algorithms to close the performance gap with conventional segmented cine. 
+
+An alternative strategy is to reduce the number of acquired slices, thereby preserving both spatial and temporal resolution at the cost of reduced through-plane coverage. Previous studies have demonstrated that LV mass and LV ejection fraction can be estimated from cine of a single long-axis (LAX) slice (16-18). However, despite showing good accuracy, the adopted models remain geometrically simple, and full reconstruction of LV shape cannot be achieved. To date, this approach has not been widely adopted in clinical practice. Kuoy et al. and Nguyen et al. demonstrated the feasibility of using three short-axis (SAX) slices, primarily motivated by alleviating the segmentation burden. Although satisfactory agreement was reported between reduced-slice (3 slices) and full-slice (~10 slices) acquisitions in LV functional quantification, both studies relied on conventional algorithms provided by commercial software, without investigating dedicated reconstruction or interpolation algorithms or leveraging the additional spatial context afforded by two-chamber and four-chamber LAX views (19,20). In our previous work, a 3D convolutional neural network was employed to reconstruct LV geometry from sparse short-axis slices conditioned on two-chamber (2ch) and four-chamber (4ch) LAX slices (21), providing an initial demonstration of the feasibility of reconstructing LV shape and function from sparse cine views. However, the model adopted in that work was limited in representational capacity. Meanwhile, various learning-based methods have been proposed to reconstruct LV shape accurately from cine short-axis and long-axis slices (22-34). Among these, Muffoletto et al. proposed a neural implicit representation approach to reconstruct LV shape from as few as half the standard short-axis slices (22), while the remaining studies largely focused on full-stack inputs and did not attempt to reconstruct LV shape from ultra-sparse cine acquisitions. Although these methods enable accurate, automatic, end-to-end reconstruction of the 3D left ventricular shape from cine images, they still rely on a complete slice stack as input, and several approaches require large training datasets (22,28,29). Taken together, these gaps motivate further investigation into advanced deep learning reconstruction techniques, systematic assessment of agreement with conventional dense-slice acquisitions, and evaluation of clinical feasibility in patient cohorts. 
+
+We hypothesize that conventional slice-dense cardiac cine acquisition can be substantially accelerated through ultra-sparse slice sampling, and that a deep learning-based reconstruction framework can accurately recover left ventricular volumetric and functional indices from such sparse inputs, ultimately achieving clinically meaningful reductions in scan time without compromising diagnostic quality. The main contributions of this study are: 1. A Conditional Anatomy-Aware Diffusion Model (LV-CARE-Diff) was developed to reconstruct the complete left ventricular shape from as few as three ultra-sparse SAX and two LAX cine slices, establishing a deep learning-based framework for accelerated cardiac magnetic resonance cine examination. 2. A coarse-to-fine reconstruction strategy was explored for LV shape reconstruction from ultra-sparse cine slices, in which a 3D convolutional neural network first generated an initial coarse left ventricular shape, subsequently refined by a residual diffusion model to yield the final anatomically accurate reconstruction. 3. A condition-guided input encoding imaging plane orientation and positional metadata was constructed to enable spatial awareness, complemented by amulti-objective training strategy jointly supervising shape fidelity, functional consistency, and anatomical plausibility to guide high-fidelity left ventricular shape prediction. 4. The robustness of LV-CARE-Diff was systematically evaluated with respect to several confounding factors, including cardiac phase, number and location of input SAX slices, and the absence of LAX slice inputs. 
+
+Methods 
+
+LV-CARE-Diff Design 
+
+Figure 1 illustrates the overall framework of this study. The objective is to recover the complete LV shape from an ultra-sparse input consisting of 3 SAX slices and 2 LAX slices. This reconstruction problem can be formulated as: Y= f(X)+ n, where Y={Y Endo, 
+
+YEpi } denotes the ground-truth LV shapes comprising the endocardial and epicardial surfaces, X represents the sparse input slices, and n denotes noise. Here, Y Endo , Y Epi , n
+
+∈RW×H×D , and W×H×D denotes the spatial dimensions of the output volume. When dense SAX slices spanning from apex to base are available alongside LAX slices, f(⋅) can be realised by conventional approaches such as shape-based interpolation, statistical shape models, or atlas-based methods (35,36). However, given only 3 ultra-sparse cine SAX and two LAX slices, this reconstruction problem becomes severely ill-posed, and the complete LV shape can no longer be reliably recovered by such means. To address this, we proposed a deep learning approach, LV-CARE-Diff, to approximate f(⋅), with the objective of reconstructing the complete LV shape while preserving accurate functional quantification. As shown in Figure 1A , LV-CARE-Diff comprises two subnetworks, LVRecNet and DiffResNet, following a coarse-to-fine strategy. A six-channel spatial condition tensor 
+
+𝐀 ' ∈ 𝐀 𝐀×𝐀×𝐀×6 is constructed from the sparse observations 𝐀 to serve as condition-guided input for both networks. LVRecNet takes 𝐀 ' as input and recovers a coarse LV shape 𝐀  𝐀 , which is subsequently refined iteratively by DiffResNet. This process can be expressed as 𝐀  𝐀 = 𝐀  𝐀 + 𝐀tanh (𝐀  ) , where 𝐀  𝐀 represents the final output, 𝐀   is the residual for refining 𝐀  𝐀 , 𝐀 is a hyperparameter balancing the contribution of the predicted residual relative to the coarse estimate, and the tanh 
+
+function constrains the magnitude of the predicted residual .Condition-guided Inputs 
+
+As shown in Figure 1B , the six channels of X’ are designed as follows: one epicardial mask (Mask Epi ), one endocardial mask (Mask Endo ), one observed mask corresponding to the SAX stack (Mask observed, SAX ), two observed masks corresponding to the two LAX slices (Mask observed,2ch and Mask observed,4ch ), and one z-map. Mask Epi and Mask Endo 
+
+are constructed by mapping the segmented epicardial and endocardial contours from both SAX and LAX cine images into the 3D volume, using the image-position-patient, image-orientation-patient, slice location, and pixel spacing parameters extracted from the DICOM. Each Mask observed encodes the acquisition status of the corresponding plane: a value of one denotes a voxel location belonging to an observed-plane slice, while zero denotes a location outside that plane. These observed-plane prompts provide spatial acquisition cues to guide the network and do not constrain the output at the observed locations. The z-map is a depth-coordinate map that varies linearly from -1 to 1 along the apex-to-base axis, encoding the relative position of each slice within the LV volume. 
+
+Coarse LV Shape Reconstruction 
+
+LVRecNet is designed as a 3DUNet comprising two downsampling blocks, two upsampling blocks, and a bottleneck block, with skip connections concatenating encoder and decoder feature maps at each resolution level. Each block consists of two 3D convolutional layers (Conv3D), each followed by a ReLU activation function. Max-pooling (MaxPool3D) and transposed convolution (ConvTranspose3D) operations are adopted for downsampling and upsampling, respectively. At the end, a 1×1×1 convolutional layer followed by a sigmoid activation function is applied to produce the coarse LV shape prediction 𝐀  𝐀 .
+
+Residual Diffusion Refinement 
+
+As shown in Figure 1C , DiffResNet is a time-conditioned 3D residual U-Net that shares the encoder-decoder topology of LVRecNet but replaces the standard convolutional blocks with residual blocks, and adopts learned strided convolutions in place of max-pooling and transposed convolutions for downsampling and upsampling, respectively. The diffusion timestep t is first encoded via a 128-dimensional sinusoidal positional embedding, then processed through a multilayer perceptron to produce a time embedding Et, which is injected into each residual block to enable the network to modulate the network’s denoising behavior according to the noise level at each timestep. For a given input feature tensor F and time embedding E t, each residual block (ResBlock) is computed as: 𝐀𡐀𝐀𤠀𝐀𨀀𝐀𝐀(𝐀, 𝐀 𝐀 ) = 𝐀𨀀𝐀𧀀3𝐀 𝐀𡠀𝐀𥠀 𝐀𞠀 𝐀𨀀𝐀𧀀3𝐀 𝐀𡠀𝐀𥠀 𝐀𞠀 𝐀 + 𝐀 𝐀 𝐀 𝐀 + 𝐀 𝐀 𝐀 , where SiLU denotes the Sigmoid Linear Unit activation, GN denotes group normalization, Wt is a learned linear projection of Et onto the feature space, and Ws is either an identity mapping or a 1×1×1 convolution used to match the channel dimensionality of the residual branch. The encoder of DiffResNet progressively increases the channel dimension from 32 to 64 across two downsampling stages, each comprising a ResBlock followed by a stride-2 Conv3D for spatial downsampling. A bottleneck ResBlock then operates at the lowest resolution, producing feature maps with 128 and 64 output channels sequentially. The decoder mirrors the encoder using ConvTranspose3D for upsampling and concatenating the corresponding encoder feature maps at each resolution level. Two independent 1×1×1 convolutional output heads produce the predicted noise 𝐀  ∈ RW×H×D×2 for the endocardial and epicardial shapes separately. At a given diffusion timestep t, the residual Rt∈R W×H×D×2 , the condition tensor X’, and 𝐀  𝐀 are concatenated along the channel dimension to form a combined input tensor F∈W×H×D×10 , which is fed into DiffResNet. Here, 𝐀  𝐀 is kept differentiable throughout the conditioning path. Given the noise 𝐀   predicted by DiffResNet, the clean residual is recovered as: 𝐀  0(𝐀) = 𝐀  𝐀 − 1−𝐀 𝐀 𝐀  𝐀 𝐀 
+
+, where 𝐀 𝐀 is the cumulative product coefficient of the diffusion schedule. During inference, the denoising process is executed using a 50-step denoising diffusion implicit model (DDIM) sampling scheme (37). 
+
+Structure, Anatomy, Function, and Diffusion Losses 
+
+Multiple loss functions were employed to constrain the model output, collectively supervising LV structure, anatomy, and volume. We first define a joint Binary Cross-Entropy (BCE) and Dice loss with equal weighting for a paired prediction 𝐀  
+
+and its reference PRef : ℒBD (𝐀  , 𝐀 𝐀𡐀𝐀 ) = 0.5ℒ BCE (𝐀  , 𝐀 𝐀𡐀𝐀 ) + 0.5ℒ Dice (𝐀  , 𝐀 𝐀𡐀𝐀 ) . Here, BCE provides voxel-wise supervision, whereas Dice measures overlap and is less sensitive to class imbalance caused by background dominance. For each category 𝐀 ∈ {𝐀𝐀𝐀𨀀, 𝐀𞀀 𡠀}, the whole-LV shape loss at diffusion timestep t is defined as ℒLV,q (𝐀) = ℒ BD 𝐀  𝐀 (𝐀) , 𝐀 𝐀 𝐀𡐀𝐀 . For the acquired SAX slices, the corresponding slices are resampled from 𝐀  𝐀 (𝐀) at the locations of the acquired planes, and the joint BCE and Dice loss is calculated and denoted ℒSAX, q (𝐀) . For the LAX slices, a differentiable signed distance field (SDF) proxy is first computed for the predicted LV shape, denoted sdf (⋅). The image plane of each LAX view v is then resampled from this proxy volume via a projection operator proj (⋅,v), yielding a 2D SDF slice for that view. The SmoothL1 loss is then computed between the projected signed-field slices and the corresponding reference SDF slice SDF 𧀀 𝐀𡐀𝐀 for LAX consistency. The whole-volume and SAX terms supervise global and observed-plane occupancy, whereas the projected LAX term checks boundary position and signed inside/outside geometry on the acquired long-axis views. Let 𝐀 𡠀 = {1, 2} denote the set of valid LAX slices, where 1 and 2 correspond to the 2ch and 4ch acquisitions, respectively. The LAX consistency loss is then defined as: 
+
+ℒLAX,𝐀 (𝐀) = 1𝐀 𡠀 𝐀 𡠀 
+
+SmoothL1 proj 𝐀𝐀𝐀 𝐀  𝐀 𝐀 , 𝐀 𡠀 , SDF 𝐀 𡠀 
+
+> 𝐀𡐀𝐀
+
+ 
+
+If no LAX slices are available, ℒLAX,𝐀 (𝐀) is set to 0. The combined shape loss for each category q is defined as: 
+
+ℒ𝐀ℎ𝐀𞀀 𡐀, 𝐀 (𝐀) = 1.0ℒ 𝐀𝐀,𝐀 (𝐀) + 0.5ℒ SAX,q (𝐀) + 0.3ℒ LAX,q (𝐀) 
+
+Because endocardial errors directly affect cavity volume estimates, the full left ventricular shape loss assigns a higher weight to the endocardial region and is defined as: 
+
+ℒLVShape = 1.5ℒ 𝐀ℎ𝐀𞀀 𡐀,Endo (t) + ℒ 𝐀ℎ𝐀𞀀 𡐀,Epi (t) .The LV myocardium is additionally constrained using the joint BCE and Dice loss, denoted ℒMyo (𝐀) . The overall structure loss, combining the refined prediction 𝐀  (𝐀) , the myocardium term, and the coarse prediction 𝐀  𝐀 from LVRecNet, is defined as 
+
+ℒStructure =ℒ 𝐀𝐀𝐀ℎ𝐀𞀀 𡐀,𝐀  (𝐀)  
+
+> (𝐀)
+
++ 0.2 ℒ Myo (𝐀) + 0.8ℒ 𝐀𝐀𝐀ℎ𝐀𞀀 𡐀,𝐀  𝐀 
+
+> (𝐀)
+
+Anatomy loss: to enforce the geometric constraint that the endocardial shape lies entirely within the epicardial shape, the anatomy loss is defined as 
+
+ℒAnatomy = mean ReLU 𝐀  𝐀𝐀𝐀𨀀 (𝐀) − 𝐀  𝐀𞀀 𡠀 (𝐀) .
+
+Function loss: to supervise LV function, a volume loss is computed between the predicted volume and reference volume: ℒVol = SmoothL1 SmoothL1 𝐀  , 𝐀 𝐀𡐀𝐀 .
+
+Diffusion loss : the diffusion noise loss was defined as: 
+
+ℒDiff = 12 (MSE 𝐀  𝐀𝐀𝐀𨀀 , 𝐀 Endo 𝐀  𝐀𝐀𝐀𨀀 , 𝐀 Endo + MSE 𝐀  𝐀𞀀 𡠀 , 𝐀 Epi ).Anchor loss: To prevent the coarse LV prediction from being unexpectedly deformed by the diffusion residual refinement, an anchor loss penalizes large deviations between the refined output and the coarse prediction: 
+
+ℒAnchor = mean |𝐀  𝐀𝐀,𝐀 (𝐀) , 𝐀 𝐀𝐀,𝐀 𝐀 |
+
+Overall, the total loss at diffusion step t, used to update LV-CARE-Diff, is a weighted sum of all the above terms: 
+
+ℒtotal = ℒ Sturcture + 0.05ℒ 𝐀𝐀𝐀𝐀𨀀𣠀𝐀 + 0.10ℒ Vol + ℒ 𝐀𡠀𝐀𝐀 + 0.08ℒ Anchor 
+
+MR dataset and Reference Construction 
+
+The cine dataset comprised 240 subjects (128 males, 32.9 ± 13.6 years), of whom 153 were healthy volunteers (71 males, 26.1 ± 5.6 years) and 87 were patients (57 males, 44.8 ± 15.3 years). Healthy volunteers were scanned at Tsinghua University, while patient data were acquired at Wuhan Union Hospital. All MRI studies were approved by the local Institutional Review Board, and written informed consent was obtained from all participants prior to scanning. All healthy volunteers were scanned at 3 T, while 45 patients were scanned at 3 T and the remaining 42 at 1.5 T. Each subject was imaged with 10-12 SAX slices covering the left ventricle, with a slice thickness of ~8 mm and a slice gap of 2 mm; the number of slices was determined by individual heart size. In addition, one 4ch and one 2ch views were acquired per subject. The balanced steady-state free precession (bSSFP) cine sequence acquired approximately 15 phase-encoding lines per segment per cardiac phase using an ECG-triggered readout, with two-fold Compressed SENSE acceleration. Other imaging parameters were consistent with those adopted in clinical practice. Epicardial and endocardial contours were delineated slice by slice for the end-diastolic and end-systolic phases using CVI42 (Circle Cardiovascular Imaging, Calgary, Canada), with a CMR expert manually reviewing and correcting any cases in which automatic segmentation was unsatisfactory. For each subject, the segmented contours from all SAX and LAX slices were projected into a 3D volumetric matrix using the MRI acquisition parameters, namely pixel spacing, slice location, image position, and image orientation, to construct a point-cloud representation of the reference LV shape 𝐀 𝐀 𝐀𡐀𝐀 at a target resolution of 1×1×1 mm 3. The SAX plane was aligned parallel to the xy -plane, and the slices were ordered along the z-direction from apex to base. The sparse volumetric representation of 𝐀 𝐀 𝐀𡐀𝐀 was subsequently reconstructed using a case-specific radial-field and continuous-SDF method, with the annotated SAX masks reinserted at the corresponding z-locations during the intermediate reconstruction. Anisotropic SDF regularization with volume-preserving binarization was then applied, followed by largest-component retention, Endo-inside-Epi correction, and terminal open-base repair, completing the construction of 𝐀 𝐀 𝐀𡐀𝐀 .The full cohort of 240 subjects with successfully reconstructed reference LV shapes was partitioned into training (106 healthy volunteers and 62 patients), validation (22 healthy volunteers and 14 patients), and testing (25 healthy volunteers and 11 patients) sets, corresponding to 70%, 15%, and 15% of the total, respectively. Of the 11 patients in the testing set, 8 were male, the mean age was 41.5 ± 16.5 years, and 7 were imaged at 1.5 T. 
+
+Implementation and Training 
+
+All models were developed using the PyTorch library (Meta Platforms, Menlo Park, CA, USA) and implemented on a dedicated deep-learning workstation equipped with dual Intel Xeon Gold 6226R CPUs (32 cores each), one NVIDIA RTX 4090 graphics processing unit (24 GB memory), and 512 GB RAM. The two subnetworks of LV-CARE-Diff were trained jointly using the AdamW optimizer, with momentum coefficients β1 =0.9 and β2 =0.999, a base learning rate of 2×10⁻⁴, and a weight decay coefficient of 1×10⁻⁴. A linear learning rate warmup strategy was applied over the first 5 training epochs, followed by a cosine annealing learning rate schedule. Training was conducted for 100 epochs with a batch size of 1 and gradient clipping was applied with a maximum norm threshold of 0.25. For each training batch, paired end-diastolic and end-systolic phase data were fed into LV-CARE-Diff to update the model parameters. Within each training epoch, the number of input SAX slices was randomly sampled from 3, 4, or 5 slices per volume, and the slice locations were randomly perturbed to adjacent positions to improve model robustness. For DiffResNet, η is fixed as 0.2. The diffusion process adopts T=1000 steps, with the noise variance βt increasing linearly from 10 -4 to 0.02. The signal retention coefficient is defined as αt =1− βt, with cumulative product 𝐀󏀀 𝐀 = 𡠀=1 𝐀 𝐀 𡠀   . The forward noising process at an arbitrary timestep t, randomly sampled from [1, T], is formulated as: 
+
+𝐀 𝐀 = 𝐀 𝐀 𝐀 0 + 1 − 𝐀 𝐀 𝐀, 𝐀~𝐀(0, 𝐀) .
+
+Testing studies 
+
+As no established method exists for reconstructing LV shape from ultra-sparse slice acquisitions, LV-CARE-Diff was compared against three baseline models: astandalone 3DUNet, a standalone diffusion model, and a two-stage model in which the 3DUNet was first trained and frozen, followed by training a residual diffusion model on its output (3DUnet/Diffusion). These baselines represent direct regression, direct diffusion generation, and sequential coarse-to-fine refinement. Respectively, to demonstrate the effectiveness of the coarse-to-fine end-to-end training strategy adopted in LV-CARE-Diff differs from the third model in jointly optimizing the coarse and diffusion branches. The network architecture, implementation, training parameters, and loss functions were kept identical across all methods, and all were tested using three SAX slices. For LV-CARE-Diff, we further analyzed the impact of cardiac phase (end-diastolic versus end-systolic), subject cohort (healthy volunteers versus patients), SAX slice number (increasing from 3 to 5 slices), SAX slice location (replacing the pre-calculated targeted slices with adjacent slices), and LAX slice availability (omitting one LAX view) on reconstruction performance. 
+
+Quantitative metrics 
+
+Dice coefficient and 95% Hausdorff distance (HD) were used to evaluate LV shape reconstruction performance, while mean absolute error (MAE) was used to assess LV functional index accuracy. Agreement in LV functional indices, encompassing end-diastolic volume (EDV), end-systolic volume (ESV), stroke volume (SV), and left ventricular ejection fraction (EF), between shapes reconstructed from ultra-sparse slices and those derived from the full SAX stack was examined through linear regression and Bland-Altman analysis. A paired Student's t-test was performed to assess statistically significant differences between each deep-learning model and the reference standard for each functional index, with statistical significance defined as P < 0.05. Mean difference, relative error, and t-test results are reported in the Supplementary Material. 
+
+Results 
+
+1. Feasibility Demonstration 
+
+All deep-learning models were trained successfully and performed LV shape reconstruction for all subjects; no cases were excluded from analysis. Code, data, and results are available on GitHub (https://github.com/CMRatBIT/LV-CARE-Diff). In the testing dataset, the mean number of acquired SAX slices per subject was 11.22 (range: 8-15). By reducing the input to three SAX slices, a mean acquisition time saving of approximately 73% could be achieved. In Figure 2 , both the end-diastolic and end-systolic LV shapes reconstructed from three SAX slices by the proposed LV-CARE-Diff closely matched those reconstructed from all SAX slices. LV-CARE-Diff also robustly reconstructed the LV shape from three SAX slices for a patient with mildly abnormal LV morphology. For both the healthy volunteer and the patient, the Dice coefficients of the retrospectively resampled slices further confirmed the close agreement between the LV shapes reconstructed from all SAX slices and three SAX slices. These results demonstrate the feasibility of deep learning–based LV shape reconstruction from substantially reduced SAX acquisitions. 
+
+2. LV Recovery Performance Comparison 
+
+Figures 3 and 4 visually compare LV shape reconstruction across four deep-learning models for two healthy volunteers and two patients. Shapes reconstructed by 3D UNet exhibited spatial distortion and spurious structure generation, particularly in the patients (Figure 4 ), resulting in lower Dice coefficients and less accurate LV functional indices. The standalone diffusion model tended to over-smooth the reconstructed LV shape at the basal region, as observed in the second healthy volunteer and the end-diastolic shapes of the two patients. In contrast, LV shapes reconstructed by both 3DUnet/Diffusion and LV-CARE-Diff closely matched the reference standard, yielding comparable Dice coefficients and LV functional indices. As shown in Figure 5A-C and Table 1 , LV-CARE-Diff achieved the highest Dice coefficients across all methods for both epicardial and endocardial contours at the end-diastolic and end-systolic phases. Both 3DUnet and 3DUnet/Diffusion yielded comparable LV shape reconstruction performance, with only minimal differences relative to LV-CARE-Diff. In contrast, the standalone diffusion model produced the lowest Dice coefficients, consistent with the visual results in Figures 3 and 4.Correspondingly, as shown in Figure 5D-E and Table 1 , LV-CARE-Diff achieved the smallest HD across all methods, while the standalone diffusion model yielded the largest HD error. Consistent with the Dice coefficient results, 3DUnet and 3DUnet/Diffusion exhibited comparable HD errors. As shown in Figure 5G-J , and Tables 1 and S1 , LV-CARE-Diff achieved comparable LV functional index quantification to all other methods across all four indices (EDV: 3.29 ± 5.31 mL, ESV: 2.59 ± 2.85 mL, SV: 2.97 ± 3.35 mL, LVEF: 1.80 ± 1.60%). 3DUnet/Diffusion achieved the lowest MAE for ESV (2.48 ± 2.51 mL) and LVEF (1.65 ± 1.62%), and 3DUnet achieved the lowest MAE for SV (2.76 ± 2.99 mL). As shown in Figures 6 and S1 , strong correlations were observed between LV functional indices derived from all SAX slices and those obtained from ultra-sparse 3 SAX slices with deep-learning reconstruction across all methods for LV EDV, ESV, and EF (r > 0.98), with the exception of LVEF estimated by 3DUnet and the standalone diffusion model. For SV, all correlation coefficients exceeded 0.94. In the agreement analysis (Figures 7 and S1 ), 3DUnet/Diffusion achieved minimal bias across all four LV functional indices, while the standalone diffusion model exhibited the largest bias in ESV, SV, and LVEF. The corresponding bias values for LV-CARE-Diff were -2.21 mL for EDV, 0.55 mL for ESV, -2.76 mL for SV, and -1.64% for EF. 3. Impact of cardiac phase 
+
+In Tables 2 and S2 , the difference in reconstruction performance between the end-diastolic and end-systolic cardiac phases was negligible, with no apparent difference except for a slightly higher Dice coefficient in the myocardium at the end-systolic phase. 
+
+4. Impact of Subject cohorts 
+
+Table 3 and S3 examine the difference in performance between healthy volunteers and patients. LV-CARE-Diff achieved higher accuracy for both LV shape reconstruction and functional index quantification in healthy volunteers than in patients. Although LV-CARE-Diff exhibited slightly higher prediction error in EDV and ESV for patients, the accuracy in LVEF remained well preserved without significant MAE (1.71 ± 1.34% for healthy volunteers and 2.01 ± 2.13% for patients). 
+
+5. Impact of LAX slice inputs 
+
+As LAX slices provide the main spatial structural information for LV-CARE-Diff, the model achieved the highest overall performance when both 2ch and 4ch slices were provided as input, as shown in Tables 4 and S4 , with the exception of EDV and ESV. In Table 4 , the reduction in LV shape reconstruction performance when only one LAX view was provided was not significant compared to inputting both views. Similarly, the reduction in LV functional index quantification when only one LAX view was provided was not significant compared to inputting both views, as indicated by the EF MAE of 1.99 ± 1.59% with 4ch input only, 1.81 ± 1.65% with 2ch input only, and 1.80 ± 1.60% with both views. 
+
+6. Impact of SAX Slices and Location Shift 
+
+In Tables 5 and S5 , increasing the number of input SAX slices from three to five improved both LV shape reconstruction (Hausdorff distance reduced from 2.0 mm to 1.5 mm) and LV functional index quantification by approximately twofold (1.80±1.60% VS 0.86±0.66%). However, the improvement observed when inputting five SAX slices was not significant compared to inputting four SAX slices (0.91±0.64% vs. 0.86±0.66%). As shown in Tables 6 and S6 , although LV shape reconstruction performance was not significantly affected by random slice location shifts, LV functional index quantification degraded by approximately twofold (1.80±1.60% vs. 3.60±4.06%) when slice locations were randomly shifted. 
+
+Discussion 
+
+In this study, we sought to recover LV volumetric shape and functional indices from ultra-sparse SAX cine slices through constructing a conditional anatomy-aware diffusion Model, with the dual objective of enabling rapid LV functional examination and rescuing LV function assessment from incomplete or corrupted SAX datasets. Our results demonstrate that three SAX slices combined with two LAX views can achieve 96% accuracy in LV functional estimation in both healthy volunteers and patients, relative to conventional full-stack acquisition, while reducing scan time by approximately 73%. In this study, LV-CARE-Diff is designed as a two-subnetwork architecture implementing a coarse-to-fine strategy to reconstruct the complete LV shape. LVRecNet is trained to extract coarse shape features from ultra-sparse cine slices, while DiffResNet progressively refines the coarse left ventricular shape through iterative denoising, combining the complementary strengths of convolutional and diffusion-based modelling. The results demonstrated that this coarse-to-fine architecture outperformed both a standalone 3DUNet and a standalone diffusion model. The gradient-routing strategy in LV-CARE-Diff was designed to separate target stabilization from end-to-end optimization. When constructing the residual target and the coarse reference used by the anchor loss, the coarse prediction was treated with stop-gradient, preventing these supervisory targets from changing through the same branches being optimized. In contrast, the coarse prediction remained differentiable when used as the DiffResNet condition and in the final residual-fusion path, allowing the refined segmentation losses to update both LVRecNet and DiffResNet. This asymmetric design provides stable residual and anchor references while preserving joint optimization of the coarse and refinement networks, thereby limiting excessive residual deformation without decoupling the two subnetworks. In this study, the training dataset comprised predominantly healthy volunteer data, resulting in an imbalanced distribution that may bias the model toward learning normal LV morphology. Pathological LV structures, however, often exhibit varying degrees of morphological alteration, becoming irregular and thereby increasing the difficulty of accurate LV shape reconstruction from ultra-sparse slices, or even from a full slice stack (22), which accounts for the moderate performance observed in the patient testing. Furthermore, the extent and location of myocardial remodeling vary considerably across patients (e.g., diffuse dilatation, concentric or apical hypertrophy), adding further complexity (38). Therefore, a larger and more diverse patient dataset encompassing a broad range of cardiac pathologies is required to improve the generalizability of the proposed model. In general clinical practice, the left ventricle is commonly divided into three equal slabs along the long axis, with the center of each slab imaged by quantitative mapping sequences such as cardiac T 1 and T 2 mapping (39,40). Based on this widely adopted acquisition protocol, slices at or near the center of each slab were selected as model input. To improve robustness to slice location variability, the target slice of each slab was randomly replaced with an adjacent slice during training. However, statistical analysis revealed that slices located at the slab centers were sampled at a higher frequency during training, introducing a positional bias. Consequently, LV-CARE-Diff remains moderately sensitive to slice location, as shown in Table 6 ,with LVEF estimation error increasing from -3.37 ± 4.19% to -4.91 ± 10.97% when slice positions were randomly shifted. Although this increase in relative error is unlikely to significantly impact clinical diagnosis decisions, it nonetheless warrants further investigation into more advanced training strategies to enhance spatial robustness. Our experiments indicated that increasing the number of input slices yielded no apparent improvement in performance, likely because the LV approximates atruncated ellipsoidal shape whose primary geometry is well captured by slices from representative slabs, while the apical and basal outflow tract regions can be inferred from LAX slices. Although performance showed a moderate decline with only three SAX slices (Table S5), given that each slice requires an individual breath-hold, three SAX slices represent a reasonable balance between scan efficiency and LV functional measurement accuracy. Theoretically, two LAX slices provide critical apical and basal information for recovering LV shape from ultra-sparse SAX inputs. However, experimental results demonstrated that inputting only one LAX slice still yielded high accuracy in LV functional quantification ( Table S4 ). This finding further broadens the applicability of the proposed algorithm, extending its utility to scenarios requiring rapid quantification as well as to cases with incomplete cine stack data. LV-CARE-Diff is not restricted to specific cardiac phases. Testing results indicated no significant difference in reconstruction performance between the end-diastolic and end-systolic phases. Although validation was performed at these two phases only, consistent with standard clinical practice for LV functional index quantification, the proposed LV-CARE-Diff is in principle applicable to any cardiac phase. The resulting phase-wise LV shape estimates could further be leveraged to construct a smooth and temporally continuous deforming LV shape, which may offer additional utility for comprehensive LV shape reconstruction and motion analysis. The current LV-CARE-Diff framework takes segmented binary contours as input, rendering it inherently insensitive to image contrast (e.g., GRE vs. bSSFP), field strength (e.g., 1.5T vs. 3T), and scanner vendor (e.g., Siemens vs. Philips), which contributes to improved generalizability across acquisition settings (41). In this study, segmentation was performed using CVI42 software, a widely adopted tool in clinical practice. This preprocessing step can equally be performed using alternative semi-automatic or fully automatic segmentation tools, or manual delineation, without significantly impacting model performance. A dedicated segmentation model incorporating automatic cardiac phase identification could be integrated into the pipeline to further improve end-to-end automation; however, this may introduce segmentation-related errors and potentially reduce generalizability. Further investigation and development in this direction are warranted. With the proposed LV-CARE-Diff framework, a subject-specific adaptive CMR protocol could be achieved in clinical practice. As our results demonstrate that LV-CARE-Diff performs more accurately in cases with regular cardiac morphology, the necessary number and locations of short-axis slices could be prospectively optimized prior to scanning, guided by the referring physician's clinical assessment, patient history, and prior examination records, thereby minimizing the risk of reduced accuracy in functional evaluation with ultra-sparse slice acquisitions. Additionally, the proposed framework would support an inline adaptive scanning strategy, in which the number of short-axis slices is incrementally increased until the estimated functional indices converge to a stable value, and slice locations are optimized according to the long-axis view, yielding an intelligent and efficient clinical examination. The current version of LV-CARE-Diff focuses exclusively on LV volumetric reconstruction and does not extend to right ventricular volume estimation. A primary technical constraint is that the LAX slices are oriented exclusively across the left ventricle, providing limited structural information of the right ventricle. As LV functional quantification is of greater clinical priority in the majority of cardiac conditions, this scope was considered appropriate for the present study. However, the applicability of the current framework is consequently restricted in patients with predominant right ventricular pathology, such as pulmonary heart disease, where RV functional assessment is clinically essential (42). Future work should extend LV-CARE-Diff to incorporate right ventricular volumetric reconstruction, including the optimization of slice selection strategies and systematic performance evaluation in RV-related conditions. Although the proposed method demonstrated that LV function can be accurately estimated from a small number of slices (e.g., three SAX slices and one LAX slice), offering a significant reduction in cine acquisition time, this sparse input protocol inherently limits certain clinical applications. Specifically, applications such as whole-heart tissue displacement mapping, assessment of regional wall motion abnormalities, and myocardial radiomics require a complete cine stack and therefore fall outside the scope of the current framework (43,44). Clinicians should be made aware of these limitations prior to adoption of the proposed method. Moreover, motion artifacts degrade image quality, compromising the reliability of LV functional quantification and necessitating repeat acquisitions (45,46). Although formal validation is pending, preliminary results suggest that LV-CARE-Diff may enable robust LV functional assessment even when a limited number of slices are mildly affected by motion artifact, potentially obviating the need for repeat acquisitions or patient recall. Several limitations of the present study should be acknowledged. First, as no existing method has been proposed to reconstruct the LV shape from ultra-sparse cine slices, direct comparison with other state-of-the-art methods was not possible. Second, as this work represents a proof-of-concept study, the number of patients included was limited, and findings should be interpreted accordingly. Third, the study was conducted retrospectively, and further prospective validation will be required to confirm the generalizability of the proposed framework. Fourth, the optimal short-axis slice locations for input were not systematically investigated. Finally, other advanced deep learning techniques were not explored, and their potential to further improve reconstruction performance remains to be investigated. 
+
+Conclusion 
+
+This study introduced LV-CARE-Diff, a diffusion-based deep learning framework for reconstructing the complete left ventricular shape from ultra-sparse cine acquisitions, offering a practical pathway to accelerated cardiovascular magnetic resonance examination. LV-CARE-Diff adopts a two-stage coarse-to-fine architecture, incorporating multiple well-designed loss functions to jointly supervise shape fidelity, functional consistency, and anatomical plausibility. Testing results demonstrated that LV-CARE-Diff robustly recovered LV shape from three SAX slices, achieving 96% accuracy in LV functional quantification while reducing acquisition time by approximately 70% compared with conventional dense SAX protocols. Although further clinical validation and optimization are warranted, these initial results suggest that LV-CARE-Diff represents a viable solution for streamlined cine workflows and, more broadly, a robust framework for salvaging quantitative LV assessments from incomplete acquisitions. REFERENCES 
+
+1. Bozkurt B, Ahmad T, Alexander KM, et al. Heart Failure Epidemiology and Outcomes Statistics: A Report of the Heart Failure Society of America. J Card Fail 2023;29(10):1412-1451. 2. Expert Committee of the Heart Failure Comprehensive Management Center NCfCaN, Disease Control and Prevention CCfDCaPEaCF, Branch CGS. White Paper: Advances in Heart Failure Prevention and Treatment in China. Chinese Circulation Journal 2026;41(4). 3. Karamitsos TD, Francis JM, Myerson S, Selvanayagam JB, Neubauer S. The Role of Cardiovascular Magnetic Resonance Imaging in Heart Failure. Journal of the American College of Cardiology 2009;54(15):1407-1424. 4. Heidenreich PA, Bozkurt B, Aguilar D, et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines. Circulation 2022;145(18):e895-e1032. 5. Ipek R, Holland J, Cramer M, Rider O. CMR to characterize myocardial structure and function in heart failure with preserved left ventricular ejection fraction. European Heart Journal - Cardiovascular Imaging 2024;25(11):1491-1504. 6. Aimo A, Tops LF, Adamopoulos S, et al. Multimodality imaging in advanced heart failure. A clinical consensus statement of the Heart Failure Association of the ESC. Part 1: Multimodality imaging for the evaluation of patients with advanced heart failure. European Journal of Heart Failure 2025;27(11):2544-2556. 7. Kramer CM, Barkhausen J, Bucciarelli-Ducci C, Flamm SD, Kim RJ, Nagel E. Standardized cardiovascular magnetic resonance imaging (CMR) protocols: 2020 update. J Cardiovasc Magn Reson 2020;22(1):17. 8. Hundley WG, Bluemke DA, Bogaert J, et al. Society for Cardiovascular Magnetic Resonance (SCMR) guidelines for reporting cardiovascular magnetic resonance examinations. J Cardiovasc Magn Reson 2022;24(1):29. 9. Atkinson DJ, Edelman RR. Cineangiography of the heart in a single breath hold with a segmented turboFLASH sequence. Radiology 1991;178(2):357-360. 10. Raman SV, Markl M, Patel AR, et al. 30-minute CMR for common clinical indications: a Society for Cardiovascular Magnetic Resonance white paper. J Cardiovasc Magn Reson 2022;24(1):13. 11. Marks B, Mitchell DG, Simelaro JP. Breath-holding in healthy and pulmonary-compromised populations: Effects of hyperventilation and oxygen inspiration. Journal of Magnetic Resonance Imaging 1997;7(3):595-597. 12. Plein S, Kozerke S. Are We There Yet? JACC: Cardiovascular Imaging 2021;14(9):1755-1757. 13. Ghanbari F, Morales MA, Street JA, et al. Free-breathing, Highly Accelerated, Single-beat, Multisection Cardiac Cine MRI with Generative Artificial Intelligence. Radiology: Cardiothoracic Imaging 2025;7(2):e240272. 14. Cruz G, Hammernik K, Kuestner T, et al. Single-heartbeat cardiac cine imaging via jointly regularized nonrigid motion-corrected reconstruction. NMR in biomedicine 2023;36(9):e4942. 15. Ghanbari F, Schulz A, Morales MA, et al. Free-breathing single-beat exercise cardiovascular magnetic resonance with generative artificial intelligence for evaluation of volumetric and functional cardiac indices: A reproducibility study. J Cardiovasc Magn Reson 2025;27(1):101901. 16. Hamdan A, Kelle S, Schnackenburg B, Fleck E, Nagel E. Improved Quantitative Assessment of Left Ventricular Volumes Using TGrE Approach After Application of Extracellular Contrast Agent at 3 Tesla. J Cardiovasc Magn Reson 2007;9(6):845-853. 17. Thiele H, Paetsch I, Schnackenburg B, et al. Improved accuracy of quantitative assessment of left ventricular volume and ejection fraction by geometric models with steady-state free precession. Journal of cardiovascular magnetic resonance : official journal of the Society for Cardiovascular Magnetic Resonance 2002;4(3):327-339. 18. Schulz-Menger J, Bluemke DA, Bremerich J, et al. Standardized image interpretation and post processing in cardiovascular magnetic resonance: Society for Cardiovascular Magnetic Resonance (SCMR) Board of Trustees Task Force on Standardized Post Processing. J Cardiovasc Magn Reson 2013;15(1):35. 19. Nguyen C, Kuoy E, Ruehm S, Krishnam M. Reliability and reproducibility of quantitative assessment of left ventricular function and volumes with 3-slice segmentation of cine steady-state free precession short axis images. European journal of radiology 2015;84(7):1249-1258. 20. Kuoy E, Nguyen CV, Dissanayake SN, Nelson KJ, Abbona PJ, Krishnam MS. Quantitative assessment of LV function and volumes with 3-slice segmentation of cine SSFP short axis images: our experience. J Cardiovasc Magn Reson 2014;16. 21. Lian Y, Liu B, Wang A, et al. An End-to-End Neural Network for Establishing Left-Ventricular Volume from Sparse Cine Slices. Cape Town - 2026 ISMRM-ISMRT Annual Meeting and Exhibition. Cape Town, South Africa: ISMRM; 2026. 22. Muffoletto M, Hermida U, Mauger CA, et al. Neural implicit heart coordinates: 3D cardiac shape reconstruction from sparse segmentations. Medical Image Analysis 2026;111:104052. 23. Xiao J, Zheng W, Wang W, et al. Slice2Mesh: 3D Surface Reconstruction From Sparse Slices of Images for the Left Ventricle. IEEE Transactions on Medical Imaging 2025;44(3):1541-1555. 24. Ye M, Yang D, Kanski M, Axel L, Metaxas D. Neural Deformable Models for 3D Bi-Ventricular Heart Shape Reconstruction and Modeling from 2D Sparse Cardiac Magnetic Resonance Imaging. 2023 IEEE/CVF International Conference on Computer Vision (ICCV); 2023. p. 14201-14210. 25. Biffi C, Cerrolaza JJ, Tarroni G, et al. 3D High-Resolution Cardiac Segmentation Reconstruction From 2D Views Using Conditional Variational Autoencoders. 2019 IEEE 16th International Symposium on Biomedical Imaging (ISBI 2019); 2019. p. 1643-1646. 26. Chang Q, Yan Z, Zhou M, et al. DeepRecon: Joint 2D Cardiac Segmentation and 3D Volume Reconstruction via a Structure-Specific Generative Method. In: Wang L, Dou Q, Fletcher PT, Speidel S, Li S, editors. Medical Image Computing and Computer Assisted Intervention – MICCAI 2022. Cham: Springer Nature Switzerland; 2022. p. 567-577. 27. Beetz M, Banerjee A, Grau V. Point2Mesh-Net: Combining Point Cloud and Mesh-Based Deep Learning for Cardiac Shape Reconstruction. In: Camara O, Puyol-Antón E, Qin C, et al., editors. Statistical Atlases and Computational Models of the Heart Regular and CMRxMotion Challenge Papers. Cham: Springer Nature Switzerland; 2022. p. 280-290. 28. Bai W, Shi W, de Marvao A, et al. A bi-ventricular cardiac atlas built from 1000+ high resolution MR images of healthy subjects and an analysis of shape and motion. Med Image Anal 2015;26(1):133-145. 29. Petersen SE, Matthews PM, Bamberg F, et al. Imaging in population science: cardiovascular magnetic resonance in 100,000 participants of UK Biobank - rationale, challenges and approaches. J Cardiovasc Magn Reson 2013;15(1):46. 30. Tóthová K, Parisot S, Lee M, et al. Probabilistic 3D Surface Reconstruction from Sparse MRI Information. In: Martel AL, Abolmaesumi P, Stoyanov D, et al., editors. Medical Image Computing and Computer Assisted Intervention – MICCAI 2020. Cham: Springer International Publishing; 2020. p. 813-823. 31. Xia Y, Chen X, Ravikumar N, et al. Automatic 3D+t four-chamber CMR quantification of the UK biobank: integrating imaging and non-imaging data priors at scale. Medical Image Analysis 2022;80:102498. 32. Beetz M, Banerjee A, Ossenberg-Engels J, Grau V. Multi-class point cloud completion networks for 3D cardiac anatomy reconstruction from cine magnetic resonance images. Medical Image Analysis 2023;90:102975. 33. Zhou X-Y, Wang Z-Y, Li P, Zheng J-Q, Yang G-Z. One-Stage Shape Instantiation from a Single 2D Image to 3D Point Cloud. In: Shen D, Liu T, Peters TM, et al., editors. Medical Image Computing and Computer Assisted Intervention – MICCAI 2019. Cham: Springer International Publishing; 2019. p. 30-38. 34. Chen X, Ravikumar N, Xia Y, et al. Shape registration with learned deformations for 3D shape reconstruction from sparse and incomplete point clouds. Medical Image Analysis 2021;74:102228. 35. Zhuang X, Shen J. Multi-scale patch and multi-modality atlases for whole heart segmentation of MRI. Medical Image Analysis 2016;31:77-87. 36. Heimann T, Meinzer H-P. Statistical shape models for 3D medical image segmentation: A review. Medical Image Analysis 2009;13(4):543-563. 37. Ermon JSCMS. Denoising Diffusion Implicit Models. International Conference on Learning Representations 2021. 38. Burchfield JS, Xie M, Hill JA. Pathological Ventricular Remodeling. Circulation 2013;128(4):388-400. 39. Puntmann VO, Valbuena S, Hinojar R, et al. Society for Cardiovascular Magnetic Resonance (SCMR) expert consensus for CMR imaging endpoints in clinical research: part I - analytical validation and clinical qualification. J Cardiovasc Magn Reson 2018;20(1):67. 40. Moon JC, Messroghli DR, Kellman P, et al. Myocardial T1 mapping and extracellular volume quantification: a Society for Cardiovascular Magnetic Resonance (SCMR) and CMR Working Group of the European Society of Cardiology consensus statement. J Cardiovasc Magn Reson 2013;15(92). 41. Gerretsen SC, Versluis B, Bekkers SCAM, Leiner T. Cardiac cine MRI: Comparison of 1.5T, non-enhanced 3.0T and blood pool enhanced 3.0T imaging. European journal of radiology 2008;65(1):80-85. 42. Sanz J, Sánchez-Quintana D, Bossone E, Bogaard Harm J, Naeije R. Anatomy, Function, and Dysfunction of the Right Ventricle. JACC 2019;73(12):1463-1482. 43. Smiseth Otto A, Rider O, Cvijic M, Valkovič L, Remme Espen W, Voigt J-U. Myocardial Strain Imaging. JACC: Cardiovascular Imaging 2025;18(3):340-381. 44. Raisi-Estabragh Z, Izquierdo C, Campello VM, et al. Cardiac magnetic resonance radiomics: basic principles and clinical perspectives. European heart journal cardiovascular Imaging 2020;21(4):349-356. 45. Rajiah PS, Sundaram B, Ng MY, Ranganath P, Araoz PA, Bolen MA. Artifacts at Cardiac MRI: Imaging Appearances and Solutions. Radiographics 2025;45(1):e230200. 46. Lyu Q, Shan H, Xie Y, et al. Cine Cardiac MRI Motion Artifact Reduction Using a Recurrent Neural Network. IEEE Trans Med Imaging 2021;40(8):2170-2181. Figure and Table Captions 
+
+Figure 1. Overview of LV-CARE-Diff. A: Study aim and network architecture of LV-CARE-Diff. LV-CARE-Diff employs a coarse-to-fine, end-to-end framework to reconstruct the complete LV shape from ultra-sparse cine acquisitions (three SAX + two LAX slices), enabling acceleration of routine cine examinations that otherwise require a full SAX stack. LV-CARE-Diff comprises two substeps: a 3DUNet first predicts a coarse LV shape, which is subsequently refined by a condition-guided residual diffusion model. B: The contours and spatial positions of the three SAX and two LAX slices are encoded as a multi-channel condition tensor X’ , which provides LV shape context to guide the full LV-CARE-Diff reconstruction. C: The time-conditioned 3D ResUNet employed for denoising within the diffusion model. D: 
+
+Multiple loss functions constraining reconstruction fidelity across structural, anatomical, functional, and diffusion denoising objectives. Figure 2. Comparison of left ventricular volumes reconstructed from three short-axis and two long-axis slices of a healthy volunteer and a patient volunteer using LV-CARE-Diff. The Dice coefficient of epicardial and endocardial contours was computed between cross-sections retrospectively derived from the LV-CARE-Diff-reconstructed volume and the originally acquired slices. Slices marked with a green check mark represent the input SAX slices. Figure 3 . Visual comparison of left ventricular volumes reconstructed from three short-axis and two long-axis slices of two healthy volunteers using different methods. The Dice coefficient for the entire LV volume and the LV functional indices are reported below. Figure 4. Visual comparison of left ventricular volumes reconstructed from three short-axis and two long-axis slices for two patients using different methods. The Dice coefficient for the entire LV volume and the LV functional indices are reported below. Figure 5. Comparison of Dice coefficients and 95% Hausdorff distance (HD) for reconstructed LV shape across four deep learning models, and the corresponding MAE for LV functional index quantification. Figure 6. Correlation between LV functional indices estimated from all slices and ultra-sparse slices using deep-learning reconstruction. Figure 7. Bland-Altman plots for examining the agreement in LV functional index quantification between the reference standard derived from all SAX slices and the estimates obtained from ultra-sparse SAX slices. Table 1. Quantitative performance comparison of different deep-learning models (N=36) 
+
+LV shape reconstruction Dice HD (mm) 
+
+Endocardium Epicardium Myocardium Endocardium Epicardium Myocardium 
+
+3DUNet 0.943 ± 0.020 0.956 ± 0.015 0.854 ± 0.035 2.708 ± 1.734 2.843 ± 1.722 2.956 ± 1.659 Diffusion 0.906 ± 0.013 0.942 ± 0.009 0.787 ± 0.026 5.572 ± 0.946 11.399 ± 1.776 3.467 ± 1.007 3DUnet/Diffusion 0.946 ± 0.019 0.953 ± 0.013 0.854 ± 0.028 2.514 ± 1.558 2.770 ± 1.534 2.613 ± 1.393 LV-CARE-Diff 0.952 ± 0.019 0.967 ± 0.014 0.886 ± 0.033 2.257 ± 1.456 2.101 ± 1.476 2.155 ± 1.327 
+
+LV function quantification MAE EDV (ml) ESV (ml) SV (ml) EF (%) 
+
+3DUNet 3.74±6.28 3.13±4.21 2.76±2.99 1.82±1.32 Diffusion 3.48±3.63 4.47±3.36 6.11±3.95 4.49±2.74 3DUnet/Diffusion 4.31±4.52 2.48±2.51 3.25±3.06 1.65±1.62 
+
+LV-CARE-Diff 3.29±5.31 2.59±2.85 2.97±3.35 1.80±1.60 Table 2. Impact of cardiac phase (N=36) 
+
+Dice HD (mm) 
+
+Endocardiu m Epicardium Myocardium Endocardium Epicardium Myocardiu mEnd-Diastolic phase 0.960±0.023 0.969±0.017 0.865±0.040 2.255 ± 1.731 2.164 ± 1.801 2.135 ± 1.585 End-Systolic phase 0.944±0.019 0.965±0.012 0.906±0.029 2.258 ± 1.314 2.038 ± 1.213 2.174 ± 1.119 Table 3. Performance Comparison Between Healthy Volunteers and Patients 
+
+LV shape reconstruction Dice HD (mm) Endocardium Epicardium Myocardium Endocardium Epicardium Myocardium 
+
+Healthy volunteers (N=25) 
+
+0.960 ± 0.008 0.973 ± 0.005 0.899 ± 0.015 1.638 ± 0.360 1.502 ± 0.379 1.613 ± 0.327 
+
+Patients (N=11) 0.934 ± 0.025 0.954 ± 0.019 0.854 ± 0.042 3.663 ± 1.995 3.461 ± 2.086 3.385 ± 1.872 
+
+LV function quantification MAE 
+
+EDV (ml) ESV (ml) SV (ml) EF (%) 
+
+Healthy volunteers (N=25) 
+
+1.47±1.32 1.94±1.79 2.10±1.65 1.71±1.34 
+
+Patients (N=11) 7.41±8.23 4.05±4.16 4.97±5.13 2.01±2.13 Table 4. The impact of condition-guided input with/without LAX slice (n=36) 
+
+LV shape reconstruction Dice HD (mm) 
+
+Endocardium Epicardium Myocardium Endocardium Epicardium Myocardium 
+
+2ch+4ch 0.952 ± 0.019 0.967 ± 0.014 0.886 ± 0.033 2.257 ± 1.456 2.101 ± 1.476 2.155 ± 1.327 
+
+4ch 0.950 ± 0.019 0.963 ± 0.015 0.876 ± 0.038 2.380 ± 1.366 2.450 ± 1.523 2.376 ± 1.271 2ch 0.950 ± 0.019 0.963 ± 0.015 0.879 ± 0.035 2.589 ± 1.827 2.729 ± 2.315 2.375 ± 1.442 
+
+LV function quantification EDV (ml) ESV (ml) SV (ml) EF (%) 
+
+2ch+4ch 3.29±5.31 2.59±2.85 2.97±3.35 1.80±1.60 
+
+4ch 3.26 ± 4.77 2.48 ± 2.88 3.21 ± 3.04 1.99 ± 1.59 2ch 3.77 ± 6.06 2.56 ± 2.98 3.19 ± 3.79 1.81 ± 1.65 Table 5. Impact of the number of SAX slices (n=36) 
+
+LV shape reconstruction Dice HD (mm) 
+
+Endocardiu m Epicardium Myocardium Endocardium Epicardium Myocardium 
+
+3 0.952 ± 0.019 0.967 ± 0.014 0.886 ± 0.033 2.257 ± 1.456 2.101 ± 1.476 2.155 ± 1.327 4 0.966 ± 0.014 0.976 ± 0.009 0.914 ± 0.029 1.613 ± 0.775 1.567 ± 0.913 1.615 ± 0.881 5 0.971 ± 0.010 0.980 ± 0.008 0.928 ± 0.025 1.502 ± 0.704 1.366 ± 0.715 1.460 ± 0.704 
+
+LV function quantification EDV (ml) ESV (ml) SV (ml) EF (%) 
+
+3 3.29±5.31 2.59±2.85 2.97±3.35 1.80±1.60 4 2.01±3.35 1.36±2.07 1.68±1.59 0.91±0.64 5 1.76±2.52 1.13±1.50 1.65±1.56 0.86±0.66 Table 6 . Impact of Slice Location Shift (n=36) 
+
+LV shape reconstruction 
+
+Dice HD (mm) Endocardium Epicardium Myocardium Endocardium Epicardium Myocardium 
+
+Precalcu lated 0.952 ± 0.019 0.967 ± 0.014 0.886 ± 0.033 2.257 ± 1.456 2.101 ± 1.476 2.155 ± 1.327 Shifted 0.939 ± 0.024 0.953 ± 0.019 0.856 ± 0.043 3.320 ± 1.887 3.397 ± 1.902 3.082 ± 1.587 
+
+LV function quantification EDV (ml) ESV (ml) SV (ml) EF (%) 
+
+Precalcu lated 3.29±5.31 2.59±2.85 2.97±3.35 1.80±1.60 Shifted 8.35±9.25 3.73±4.57 7.42±8.51 3.60±4.06 Supplementary information 
+
+Table S1. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for comparison across deep learning models. 
+
+Metric All SAX slices (Reference) 3 SAX slices (Prediction) Difference Relative error (%) P3DUNet EDV (mL) 113.10 ± 31.30 111.01 ± 27.41 -2.09 ± 7.03 -1.19 ± 4.56 0.083 
+
+ESV (mL) 54.58 ± 27.21 54.13 ± 24.13 -0.45 ± 5.25 0.67 ± 6.43 0.606 
+
+SV (mL) 58.52 ± 11.12 56.88 ± 11.40 -1.64 ± 3.74 -2.71 ± 6.71 0.013 
+
+EF (%) 53.67 ± 9.39 52.86 ± 9.53 -0.81 ± 2.12 -1.56 ± 4.67 0.027 
+
+Diffusion EDV (mL) 113.10 ± 31.30 111.32 ± 32.25 -1.78 ± 4.73 -1.94 ± 4.11 0.030 
+
+ESV (mL) 54.58 ± 27.21 58.81 ± 28.60 4.23 ± 3.66 7.78 ± 6.64 <0.001 
+
+SV (mL) 58.52 ± 11.12 52.50 ± 11.63 -6.01 ± 4.11 -10.55 ± 8.24 <0.001 
+
+EF (%) 53.67 ± 9.39 49.19 ± 10.04 -4.49 ± 2.74 -8.87 ± 7.10 <0.001 
+
+3DUNet/Diffusion EDV (mL) 113.10 ± 31.30 114.58 ± 29.78 1.48 ± 6.11 1.66 ± 4.20 0.154 
+
+ESV (mL) 54.58 ± 27.21 54.86 ± 26.11 0.28 ± 3.54 0.93 ± 5.34 0.635 
+
+SV (mL) 58.52 ± 11.12 59.72 ± 12.83 1.20 ± 4.33 1.86 ± 8.05 0.105 
+
+EF (%) 53.67 ± 9.39 53.88 ± 10.26 0.21 ± 2.32 0.09 ± 5.45 0.593 
+
+LV-CARE-Diff EDV (mL) 113.10 ± 31.30 110.89 ± 28.69 -2.21 ± 5.86 -1.60 ± 4.02 0.030 
+
+ESV (mL) 54.58 ± 27.21 55.13 ± 25.54 0.55 ± 3.83 1.93 ± 5.31 0.395 
+
+SV (mL) 58.52 ± 11.12 55.76 ± 11.70 -2.76 ± 3.53 -4.86 ± 6.40 <0.001 
+
+EF (%) 53.67 ± 9.39 52.03 ± 9.84 -1.64 ± 1.76 -3.37 ± 4.19 <0.001 Table S2. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for statistical comparison between end-diastolic and end-systolic cardiac phases. 
+
+Metric All SAX slices (Reference) 3 SAX slices (Prediction) Difference Relative error (%) PEnd-Diastolic phase EDV (mL) 113.10 ± 31.30 110.89 ± 28.69 -2.21 ± 5.86 -1.60 ± 4.02 0.030 
+
+End-Systolic phase ESV (mL) 54.58 ± 27.21 55.13 ± 25.54 0.55 ± 3.83 1.93 ± 5.31 0.395 Table S3. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for statistical comparison between healthy volunteers and patients. 
+
+Metric All SAX slices (Reference) 3 SAX slices (Prediction) Difference Relative error (%) PHealthy volunteers (N=25) EDV (mL) 103.88 ± 24.23 103.59 ± 24.25 -0.29 ± 1.98 -0.35 ± 1.66 0.472 
+
+ESV (mL) 46.51 ± 14.53 48.06 ± 15.09 1.54 ± 2.16 3.19 ± 4.53 0.002 
+
+SV (mL) 57.36 ± 10.85 55.53 ± 10.09 -1.83 ± 1.95 -3.06 ± 2.76 <0.001 
+
+EF (%) 55.88 ± 4.49 54.36 ± 4.52 -1.52 ± 1.56 -2.71 ± 2.75 <0.001 
+
+Patients (N=11) EDV (mL) 134.05 ± 36.39 127.47 ± 32.14 -6.58 ± 8.97 -4.44 ± 6.09 0.035 
+
+ESV (mL) 72.92 ± 39.40 71.21 ± 36.43 -1.71 ± 5.67 -0.94 ± 6.03 0.341 
+
+SV (mL) 61.14 ± 11.81 56.26 ± 15.32 -4.87 ± 5.23 -8.96 ± 9.92 0.011 
+
+EF (%) 48.67 ± 14.84 46.74 ± 15.67 -1.93 ± 2.21 -4.89 ± 6.31 0.016 Table S4. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for investigating the impact of LAX slice input configuration. 
+
+Metric All SAX slices (Reference) 3 SAX slices (Prediction) Difference Relative error (%) P2ch+4ch EDV (mL) 113.10 ± 31.30 110.89 ± 28.69 -2.21 ± 5.86 -1.60 ± 4.02 0.030 
+
+ESV (mL) 54.58 ± 27.21 55.13 ± 25.54 0.55 ± 3.83 1.93 ± 5.31 0.395 
+
+SV (mL) 58.52 ± 11.12 55.76 ± 11.70 -2.76 ± 3.53 -4.86 ± 6.40 <0.001 
+
+EF (%) 53.67 ± 9.39 52.03 ± 9.84 -1.64 ± 1.76 -3.37 ± 4.19 <0.001 
+
+4ch EDV (mL) 113.10 ± 31.30 110.52 ± 29.04 -2.57 ± 5.18 -2.00 ± 3.63 0.005 
+
+ESV (mL) 54.58 ± 27.21 54.96 ± 25.24 0.38 ± 3.81 1.69 ± 5.49 0.558 
+
+SV (mL) 58.52 ± 11.12 55.57 ± 11.32 -2.95 ± 3.30 -5.09 ± 5.69 <0.001 
+
+EF (%) 53.67 ± 9.39 52.01 ± 9.48 -1.66 ± 1.94 -3.19 ± 3.97 <0.001 
+
+2ch EDV (mL) 113.10 ± 31.30 110.41 ± 27.96 -2.69 ± 6.62 -1.92 ± 4.42 0.020 
+
+ESV (mL) 54.58 ± 27.21 54.40 ± 25.37 -0.18 ± 3.95 0.52 ± 5.72 0.788 
+
+SV (mL) 58.52 ± 11.12 56.00 ± 11.98 -2.51 ± 4.28 -4.42 ± 7.65 0.001 
+
+EF (%) 53.67 ± 9.39 52.48 ± 10.12 -1.19 ± 2.15 -2.65 ± 5.00 0.002 Table S5. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for investigating the impact of SAX slices. 
+
+Metric All SAX slices (Reference) Prediction Difference Relative error (%) P3 SAX Slices EDV (mL) 113.10 ± 31.30 110.89 ± 28.69 -2.21 ± 5.86 -1.60 ± 4.02 0.030 
+
+ESV (mL) 54.58 ± 27.21 55.13 ± 25.54 0.55 ± 3.83 1.93 ± 5.31 0.395 
+
+SV (mL) 58.52 ± 11.12 55.76 ± 11.70 -2.76 ± 3.53 -4.86 ± 6.40 <0.001 
+
+EF (%) 53.67 ± 9.39 52.03 ± 9.84 -1.64 ± 1.76 -3.37 ± 4.19 <0.001 
+
+4 SAX Slices EDV (mL) 113.10 ± 31.30 111.81 ± 31.30 -1.29 ± 3.70 -1.17 ± 3.10 0.044 
+
+ESV (mL) 54.58 ± 27.21 54.49 ± 26.87 -0.09 ± 2.48 0.14 ± 4.02 0.822 
+
+SV (mL) 58.52 ± 11.12 57.32 ± 11.33 -1.19 ± 1.99 -2.15 ± 3.47 <0.001 
+
+EF (%) 53.67 ± 9.39 53.13 ± 9.20 -0.55 ± 0.97 -0.98 ± 1.93 0.002 
+
+5 SAX Slices EDV (mL) 113.10 ± 31.30 112.13 ± 31.52 -0.96 ± 2.93 -0.94 ± 2.33 0.056 
+
+ESV (mL) 54.58 ± 27.21 54.67 ± 27.11 0.09 ± 1.88 0.31 ± 3.00 0.775 
+
+SV (mL) 58.52 ± 11.12 57.46 ± 11.28 -1.05 ± 2.02 -1.88 ± 3.33 0.004 
+
+EF (%) 53.67 ± 9.39 53.15 ± 9.22 -0.52 ± 0.96 -0.95 ± 2.05 0.002 Table S6. Left ventricular functional quantitative results, relative errors, and paired t-test p-values for investigating the impact of SAX slice location shift. 
+
+Metric All SAX slices (Reference) 3 SAX slices (Prediction) Difference Relative error (%) PPrecalculated EDV (mL) 113.10 ± 31.30 110.89 ± 28.69 -2.21 ± 5.86 -1.60 ± 4.02 0.030 ESV (mL) 54.58 ± 27.21 55.13 ± 25.54 0.55 ± 3.83 1.93 ± 5.31 0.395 
+
+SV (mL) 58.52 ± 11.12 55.76 ± 11.70 -2.76 ± 3.53 -4.86 ± 6.40 <0.001 EF (%) 53.67 ± 9.39 52.03 ± 9.84 -1.64 ± 1.76 -3.37 ± 4.19 <0.001 Shifted EDV (mL) 113.10 ± 31.30 107.69 ± 26.10 -5.41 ± 11.28 -3.67 ± 8.53 0.007 ESV (mL) 54.58 ± 27.21 54.62 ± 24.77 0.04 ± 5.93 1.41 ± 8.06 0.971 
+
+SV (mL) 58.52 ± 11.12 53.07 ± 9.83 -5.44 ± 9.93 -7.89 ± 15.81 0.002 EF (%) 53.67 ± 9.39 51.11 ± 10.38 -2.56 ± 4.80 -4.91 ± 10.97 0.003 Figure S1. Correlation and agreement in SV between the reference standard derived from all SAX slices and estimates obtained from retrospectively under-sampled ultra-sparse SAX slices using LV-CARE-Diff.

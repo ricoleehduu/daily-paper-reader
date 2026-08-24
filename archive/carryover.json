@@ -1,30 +1,381 @@
 {
-  "generated_at": "2026-07-28T21:59:54.008948+00:00",
-  "updated_date": "20260728",
+  "generated_at": "2026-08-24T20:35:47.920034+00:00",
+  "updated_date": "20260824",
   "carryover_days": 9,
   "tag_states": {
     "di": {
-      "updated_date": "20260728",
+      "updated_date": "20260824",
       "carryover_days": 9,
       "items": []
     },
     "mit": {
-      "updated_date": "20260728",
+      "updated_date": "20260824",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2608.19825v1",
+          "source": "arxiv",
+          "title": "Towards Clinically Faithful Medical Image Captioning via Enhanced Vision-Language Alignment",
+          "abstract": "Medical image captioning is a technique that accelerates early-stage diagnostic workflows and enhances the interpretability of medical diagnostic AI systems. However, unlike general image captioning, clinically reliable captioning remains challenging due to grayscale-based modalities, subtle anatomical cues, specialized medical phrasing, and variations in data quality. Despite recent advances in large vision-language models, fluent outputs do not necessarily guarantee sufficient alignment with clinical concept spaces or evaluation criteria. To address this issue, we propose a framework that strengthens clinical alignment by separating and enhancing training-time alignment and inference-time alignment. We build a medical image captioning pipeline that integrates single/dual vision encoders based on BioMedCLIP and SigLIP2, a Q-Former, and a LLaMA-based decoder, and examine the contribution of auxiliary learning for UMLS concept/type prediction. At inference, we apply single-embedding-based reranking to select the best caption among candidates, while at training we introduce MedPAIR-SCST, which combines clinically relevant rewards to shift the generative distribution toward improved clinical alignment. Our experiments show that complementary visual representations with a multi-encoder design and concept-level auxiliary learning help preserve clinically meaningful information. Furthermore, inference-time reranking provides a practical way to improve semantic and clinical alignment without additional training, whereas MedPAIR-SCST goes beyond selection by directly improving the model's distribution to generate more consistent and clinically grounded captions. These findings suggest that jointly leveraging selection-based alignment and reinforcement-learning-based alignment can promote more trustworthy medical image captioning even in data-constrained settings.",
+          "authors": [
+            "Yunseo Lee",
+            "Hyun Jun Kim",
+            "Heeseung Shin",
+            "Changwon Lim"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.CL"
+          ],
+          "published": "2026-08-20T09:25:30+00:00",
+          "link": "https://arxiv.org/pdf/2608.19825v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Proposes enhanced vision-language alignment for clinically faithful medical image captioning",
+          "llm_evidence_cn": "提出增强视觉-语言对齐以实现临床可靠的医学图像描述生成",
+          "llm_evidence": "提出增强视觉-语言对齐以实现临床可靠的医学图像描述生成",
+          "canonical_evidence": "提出增强视觉-语言对齐以实现临床可靠的医学图像描述生成",
+          "llm_tldr_en": "Addresses clinical alignment challenges in medical image captioning by separating and enhancing training-time and inference-time alignment, improving faithfulness to clinical concepts.",
+          "llm_tldr_cn": "针对医学图像描述生成中临床对齐不足的问题，提出分离并增强训练时和推理时对齐的框架。该方法在医学图像描述任务上提升了与临床概念空间及评估标准的一致性，增强了诊断AI的可解释性。",
+          "llm_tldr": "针对医学图像描述生成中临床对齐不足的问题，提出分离并增强训练时和推理时对齐的框架。该方法在医学图像描述任务上提升了与临床概念空间及评估标准的一致性，增强了诊断AI的可解释性。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "vision language models for medical image understanding",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.19825v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.20229v1",
+          "source": "arxiv",
+          "title": "Prompt-Conditioned Channel Attention for Hierarchical Feature Modulation toward Anatomy-Agnostic Segmentation",
+          "abstract": "Anatomically plausible segmentation remains challenging because of low contrast, ambiguous boundaries, and modality-specific artifacts. Interactive segmentation has emerged as a promising strategy to guide feature extraction and improve localization, particularly in structurally ambiguous regions. However, existing methods integrate prompts through late-stage fusion and lack explicit mechanisms for prompt-driven channel-wise modulation across hierarchical feature representations, limiting their ability to capture deeper contextual and modality-specific variations. To address these limitations, we introduce Prompt-Conditioned Channel Attention (PCCA), a novel modulation mechanism that enables deep, hierarchical integration of semantic prompts within encoder-decoder networks. PCCA extracts compact channel descriptors via pooling, projects them into a shared space, and fuses them through a gated excitation mechanism to compute prompt-aware channel attention weights. These weights adaptively recalibrate feature responses across multiple network stages, enabling prompt-conditioned, semantically enriched hierarchical representations. Building on this, we propose PROMISE-Net, instantiated in two network variants: a convolutional model (PROMISE-CNN) and a transformer-based model (PROMISE-Txformer). Across the ISIC-Lesion, Kvasir-Polyp, CAMUS-Cardiac, and Kvasir-Instrument benchmarks, integrating PCCA into PROMISE-CNN yielded relative IoU gains of 10.4%, 8.7%, 0.8%, and 3.4%, respectively, over the baseline U-Net, while PROMISE-Txformer achieved corresponding gains of 7.6%, 23.0%, 2.1%, and 1.1%, respectively, over the baseline UNETR. These results show consistent improvements across architectures, imaging modalities, and anatomical targets, establishing PCCA and PROMISE-Net as a scalable, generalizable framework for prompt-aware hierarchical feature modulation in medical image segmentation.",
+          "authors": [
+            "Mosharof Hossain",
+            "Md Rabiul Islam",
+            "Limon Halder",
+            "Erchin Serpedin",
+            "Md Kamrul Hasan"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-08-20T16:24:09+00:00",
+          "link": "https://arxiv.org/pdf/2608.20229v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "prompt-conditioned channel attention for interactive segmentation",
+          "llm_evidence_cn": "用于交互式分割的提示条件通道注意力",
+          "llm_evidence": "用于交互式分割的提示条件通道注意力",
+          "canonical_evidence": "用于交互式分割的提示条件通道注意力",
+          "llm_tldr_en": "The paper proposes Prompt-Conditioned Channel Attention (PCCA) to integrate prompts into hierarchical feature modulation for anatomy-agnostic medical image segmentation, overcoming limitations of late-stage fusion.",
+          "llm_tldr_cn": "针对医学图像分割中低对比度、模糊边界和模态伪影等挑战，提出提示条件通道注意力（PCCA）机制。PCCA通过跨层级特征调制，将提示信息深度嵌入分割网络，克服了传统晚期融合的局限。实验表明PCCA能提升交互式分割性能，为基于提示的医学图像分割提供了有效方案。",
+          "llm_tldr": "针对医学图像分割中低对比度、模糊边界和模态伪影等挑战，提出提示条件通道注意力（PCCA）机制。PCCA通过跨层级特征调制，将提示信息深度嵌入分割网络，克服了传统晚期融合的局限。实验表明PCCA能提升交互式分割性能，为基于提示的医学图像分割提供了有效方案。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "Segment Anything Model applied to medical imaging",
+          "matched_requirement_id": "req-13",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.20229v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.19965v1",
+          "source": "arxiv",
+          "title": "Flow Matching Meets 3D Curvilinear Structure Segmentation in Medical Imaging",
+          "abstract": "Segmentation of curvilinear anatomical structures in 3D medical images remains challenging due to complex topology, severe class imbalance, weak contrast, and large variations in structure morphology. While deep learning approaches for 3D curvilinear segmentation have been proposed, they are often tailored to specific anatomies or modalities, limiting generalization across clinical settings and leaving room for improvement. Recent generative models have shown the benefits of iterative prediction for structured segmentation tasks, yet diffusion-based methods suffer from computationally expensive sampling, hindering their use on high-resolution 3D volumes. We present 3D-CurvSegFlow, a flow matching-based model for 3D curvilinear structure segmentation. The model learns a continuous transformation from a simple source distribution to the target vascular representation, enabling progressive refinement of complex curvilinear geometries with efficient inference. We evaluate our method on Three public challenging datasets covering distinct anatomies and modalities: portal vein, cerebral vessel, and coronary arteries. Using a common architecture and training strategy across all tasks, our method outperforms general-purpose and vessel-specific approaches, with strong preservation of thin branches and vascular continuity. This work not only advances the state-of-the-art in 3D curvilinear segmentation but also opens new avenues for efficient, generalizable, and clinically applicable methods in medical image analysis.",
+          "authors": [
+            "Sidi Mohamed Sid'El Moctar",
+            "Nicolas Vitry",
+            "Hélène Bouvrais"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.LG",
+            "q-bio.QM"
+          ],
+          "published": "2026-08-20T12:35:27+00:00",
+          "link": "https://arxiv.org/pdf/2608.19965v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "flow matching based 3D segmentation for curvilinear structures",
+          "llm_evidence_cn": "基于流匹配的三维曲线结构分割",
+          "llm_evidence": "基于流匹配的三维曲线结构分割",
+          "canonical_evidence": "基于流匹配的三维曲线结构分割",
+          "llm_tldr_en": "The paper tackles 3D curvilinear structure segmentation in medical imaging with complex topology, class imbalance, and weak contrast. It proposes 3D-CurvSegFlow, a flow matching-based model for iterative prediction, avoiding diffusion's high sampling cost. The method aims for generalization across anatomies and modalities.",
+          "llm_tldr_cn": "针对医学图像中三维曲线结构分割存在的复杂拓扑、类别不平衡和对比度低等问题，本文提出3D-CurvSegFlow，一种基于流匹配的模型，通过迭代预测实现分割，避免了扩散模型昂贵的采样。该方法适用于高分辨率三维体数据，旨在跨解剖结构和模态泛化。实验结果表明其能够有效提升三维曲线结构的分割性能。",
+          "llm_tldr": "针对医学图像中三维曲线结构分割存在的复杂拓扑、类别不平衡和对比度低等问题，本文提出3D-CurvSegFlow，一种基于流匹配的模型，通过迭代预测实现分割，避免了扩散模型昂贵的采样。该方法适用于高分辨率三维体数据，旨在跨解剖结构和模态泛化。实验结果表明其能够有效提升三维曲线结构的分割性能。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "latest advances in medical image segmentation",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.19965v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.20549v1",
+          "source": "arxiv",
+          "title": "Volumetric Radiology AI in the Era of Multimodal Large Language Models",
+          "abstract": "Advances in multimodal large language models (MLLMs) are extending radiological artificial intelligence (AI) beyond task-specific image analysis toward multimodal understanding and reasoning. Volumetric radiology, however, presents a fundamental representational mismatch: clinical interpretation often requires full-volume spatial context and acquisition-dependent quantitative information, whereas current MLLMs are commonly conditioned on selected two-dimensional (2D) images, compressed visual representations, or report-derived text. Reliable volumetric radiology AI therefore requires representations that preserve task-relevant three-dimensional (3D) information and systems that can access, verify, and integrate this information across clinical workflows. In this Review, we examine more than 200 publications through July 2026. We organize the literature around volumetric representation and multimodal understanding at the model level, agentic orchestration at the system level, and their links to clinical applications and evaluation. We review volumetric foundation models, language alignment and compression strategies, and agentic systems that extend MLLMs through planning, tools, memory, and workflow interaction. We distinguish settings in which selected 2D views or report-mediated reasoning may suffice from those that warrant native volumetric modeling. We also introduce a Claim-Design-Validation framework to assess whether technical, workflow, and clinical claims are matched by appropriate design and validation. Across the literature, native volumetric modeling and agentic capabilities depend on the spatial, quantitative, contextual, and workflow requirements of the intended task. Clinical credibility requires faithful volumetric representation, traceable system behavior, claim-aligned validation, and clearly defined human oversight in realistic workflows.",
+          "authors": [
+            "Zanting Ye",
+            "Shengyuan Liu",
+            "Xin Liu",
+            "Chenhui Wang",
+            "Zhisong Wang",
+            "Jiashuai Liu",
+            "Zipei Wang",
+            "Cheng Wang",
+            "Wentao Pan",
+            "Mengjie Fang",
+            "Di Dong",
+            "Mohammad Salmanpour",
+            "Arman Rahmim",
+            "Yu Gu",
+            "Yong Xia",
+            "Hongming Shan",
+            "Yixuan Yuan",
+            "Yefeng Zheng",
+            "Lijun Lu"
+          ],
+          "primary_category": "cs.AI",
+          "categories": [
+            "cs.AI"
+          ],
+          "published": "2026-08-20T20:23:41+00:00",
+          "link": "https://arxiv.org/pdf/2608.20549v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "multimodal large language models for volumetric radiology AI",
+          "llm_evidence_cn": "体积放射学AI中的多模态大语言模型",
+          "llm_evidence": "体积放射学AI中的多模态大语言模型",
+          "canonical_evidence": "体积放射学AI中的多模态大语言模型",
+          "llm_tldr_en": "The paper discusses the representational mismatch between volumetric radiology and current MLLMs conditioned on 2D images or text. It argues for representations preserving 3D information and systems that integrate across clinical workflows, providing a perspective on future directions.",
+          "llm_tldr_cn": "本文指出体积放射学AI面临的一个根本性表征不匹配：临床解读需要完整的空间上下文和定量信息，而现有多模态大语言模型通常仅基于二维图像或文本。文章主张需要保留任务相关三维信息的表示，并设计能够在临床工作流中访问、验证和整合这些信息的系统。该观点为体积放射学AI与MLLM的结合指明了方向。",
+          "llm_tldr": "本文指出体积放射学AI面临的一个根本性表征不匹配：临床解读需要完整的空间上下文和定量信息，而现有多模态大语言模型通常仅基于二维图像或文本。文章主张需要保留任务相关三维信息的表示，并设计能够在临床工作流中访问、验证和整合这些信息的系统。该观点为体积放射学AI与MLLM的结合指明了方向。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "vision language models for medical image understanding",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.20549v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.20144v1",
+          "source": "arxiv",
+          "title": "PelviNeXt: A Modality-Agnostic Hybrid Network for Pelvic Imaging in Women's Health",
+          "abstract": "Women's health remains substantially under-resourced in medical imaging research, with pelvic pathologies such as polycystic ovary syndrome (PCOS) and pelvic fracture both suffering from a scarcity of public, well-annotated benchmark data despite their clinical importance. We introduce PelviNeXt, a modality-agnostic hybrid architecture combining a dense convolutional feature extractor, hierarchical channel-spatial attention (H-CBAM), a multi-scale fusion module (MSFM), and talking-heads multi-head self-attention (TH-MHSA), applied without modification to both pelvic ultrasound and X-ray inputs. While benchmarking PelviNeXt on PCOSGen, the only gynaecologist-annotated public PCOS ultrasound dataset, we identified extensive exact and near-duplicate contamination within and across the dataset. We audit this contamination via perceptual hashing, publicly release a deduplicated version of the dataset, and establish the first integrity-audited evaluation protocol and baseline for PCOSGen under 5-fold cross-validation. On the only publicly available pelvic fracture X-ray dataset (PXR150), PelviNeXt exceeds previously reported state-of-the-art results across accuracy, recall, specificity, and AUROC. Ablation studies confirm that each architectural component contributes to performance on both tasks. Our results demonstrate that a single architecture, applied without task-specific modification, can serve as a reliable foundation for pelvic imaging across modalities in data-scarce, under-researched areas of women's health.",
+          "authors": [
+            "Siam Tahsin Bhuiyan",
+            "Rashedur Rahman",
+            "Sefatul Wasi",
+            "Halima Khatun",
+            "Ashraful Islam",
+            "AKM Mahbubur Rahman",
+            "Saadia Binte Alam",
+            "M Ashraful Amin"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-20T15:05:13+00:00",
+          "link": "https://arxiv.org/pdf/2608.20144v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "modality-agnostic hybrid network for pelvic imaging",
+          "llm_evidence_cn": "盆腔影像的模态无关混合网络",
+          "llm_evidence": "盆腔影像的模态无关混合网络",
+          "canonical_evidence": "盆腔影像的模态无关混合网络",
+          "llm_tldr_en": "Introduces PelviNeXt, a modality-agnostic hybrid architecture applied to pelvic ultrasound and X-ray without modification.",
+          "llm_tldr_cn": "该文针对女性健康盆腔影像缺乏充足基准数据的问题，提出模态无关混合架构PelviNeXt。该架构结合稠密卷积特征提取、分层通道空间注意力、多尺度融合模块和talking-heads多头自注意力，可无修改地应用于盆腔超声和X射线。在PCOSGen数据集上，发现并纠正了大量重复样本，并在盆腔疾病分类上取得良好性能。该方法为女性健康影像分析提供了新颖工具。",
+          "llm_tldr": "该文针对女性健康盆腔影像缺乏充足基准数据的问题，提出模态无关混合架构PelviNeXt。该架构结合稠密卷积特征提取、分层通道空间注意力、多尺度融合模块和talking-heads多头自注意力，可无修改地应用于盆腔超声和X射线。在PCOSGen数据集上，发现并纠正了大量重复样本，并在盆腔疾病分类上取得良好性能。该方法为女性健康影像分析提供了新颖工具。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "latest advances in medical image segmentation",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.20144v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.21180v1",
+          "source": "arxiv",
+          "title": "Toward Vision Language Model-based Assessment of Clinical Quality and Usability of LGE-MR Images for Cardiac Ablation Planning",
+          "abstract": "LGE cardiac MRI is widely used for left atrial fibrosis assessment and ablation planning in atrial fibrillation patients as knowledge of fibrotic tissue regions identified from LGE-MRI is critical for catheter ablation. Often, poor quality images used during ablation planning can cause mis-localization of ablation targets, directly impacting procedure safety and outcome. The decision of whether a scan meets the minimum quality threshold for ablation planning is currently made informally by the reviewing radiologist and is not captured by any automated system, yet it is arguably the most safety-critical output of the image quality assessment (IQA) process. However, variations in image quality caused by noise, motion artifacts, and poor boundary definition significantly compromise the reliability of downstream segmentation and clinical decision-making tasks. Manual quality assessment by expert radiologists is subjective and difficult to scale, while existing automated methods produce scalar scores without interpretable clinical reasoning. In this work, we propose a two-stage vision language model (VLM) framework for clinically grounded image quality assessment of left atrial LGE-MRI. In the first stage, a fine-tuned VLM generates structured radiology-style quality reports predicting five radiologist-defined criteria: Noise, Motion Artifact, LA Boundary Accuracy, PV Region Accuracy, and Under-segmentation Severity. In the second stage, a GPT-based reasoning module maps the predicted quality and reports to a structured quality scores and binary clinical usability decision for ablation planning. We curate a dataset of 60 annotated image slice-text pairs from 20 patients and benchmark four state-of-the-art VLM architectures. InternVL2 achieves the highest criterion-level accuracy (Avg ACC=0.65, PLCC=0.79), while DeepSeek achieves perfect clinical usability agreement (Acc=1.00, kappa=1.00).",
+          "authors": [
+            "Bipasha Kundu",
+            "Abhishek Chaturvedi",
+            "Axel W. E. Wismueller",
+            "Richard Simon",
+            "Cristian A. Linte"
+          ],
+          "primary_category": "eess.IV",
+          "categories": [
+            "eess.IV",
+            "cs.CV"
+          ],
+          "published": "2026-08-21T14:51:48+00:00",
+          "link": "https://arxiv.org/pdf/2608.21180v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:mit",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:di",
+            "query:dj",
+            "query:mit",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "VLM-based image quality assessment for cardiac MRI",
+          "llm_evidence_cn": "基于视觉语言模型的心脏MRI图像质量评估",
+          "llm_evidence": "基于视觉语言模型的心脏MRI图像质量评估",
+          "canonical_evidence": "基于视觉语言模型的心脏MRI图像质量评估",
+          "llm_tldr_en": "Proposes vision language model-based assessment of clinical quality and usability of LGE-MR images for cardiac ablation planning, aiming to automate IQA and improve safety.",
+          "llm_tldr_cn": "针对LGE-MRI用于房颤消融规划时图像质量影响安全的问题，本文研究基于视觉语言模型自动评估图像临床质量与可用性。通过VLM判断扫描是否达到消融规划的最低质量标准，为放射科医生提供决策支持。研究表明VLM在医学图像质量评估中具有潜力，可提升临床流程安全性。",
+          "llm_tldr": "针对LGE-MRI用于房颤消融规划时图像质量影响安全的问题，本文研究基于视觉语言模型自动评估图像临床质量与可用性。通过VLM判断扫描是否达到消融规划的最低质量标准，为放射科医生提供决策支持。研究表明VLM在医学图像质量评估中具有潜力，可提升临床流程安全性。",
+          "llm_tags": [
+            "query:mit"
+          ],
+          "matched_query_tag": "query:mit",
+          "matched_query_text": "vision language models for medical image understanding",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.21180v1",
+          "carry_days": 1
+        }
+      ]
     },
     "top-journals": {
-      "updated_date": "20260728",
+      "updated_date": "20260824",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2608.19501v1",
+          "source": "arxiv",
+          "title": "A Causal Inference Approach for Evaluating Diagnostic Tests and AI-Enabled Medical Devices: From Effect Modification to Information-Augmented Decision-Making",
+          "abstract": "Diagnostic medical tests and devices provide useful information for evaluating the potential benefits and risks of therapeutic treatments. However, unlike treatments, their impact on health outcomes is generally indirect because measuring diagnostic information typically does not itself affect patient outcomes, which complicates evaluation of their effectiveness. In this work, we develop a causal inference approach for evaluating diagnostic tests by distinguishing explanatory and pragmatic effectiveness. Explanatory effectiveness evaluates whether a diagnostic test result provides treatment-relevant information beyond baseline covariates by explaining additional treatment-effect heterogeneity, which we characterize using a variance-based treatment-effect variable importance measure. Pragmatic effectiveness evaluates whether incorporating this information into personalized treatment decisions improves expected outcomes, a question central to decision-making for patients, clinicians, and other health care stakeholders. We formalize pragmatic effectiveness as a contrast between expected outcomes under optimal personalized treatment rules defined with and without access to the diagnostic test result. We establish identification of the proposed estimand and provide Targeted Maximum Likelihood Estimation (TMLE) and cross-validated TMLE procedures for nonparametric estimation and inference. Simulation studies and a synthetic colorectal cancer application illustrate the proposed estimands and estimation performance. More broadly, this approach provides a causal inference perspective for evaluating AI-enabled devices by distinguishing their dual roles as information-enrichment and personalized decision-optimization tools, clarifying whether AI improves outcomes by expanding information for downstream decisions, improving the decision rule used to act on that information, or through both pathways.",
+          "authors": [
+            "Wenxin Zhang",
+            "Rachael Phillips",
+            "Mark van der Laan"
+          ],
+          "primary_category": "stat.ME",
+          "categories": [
+            "stat.ME",
+            "stat.ML"
+          ],
+          "published": "2026-08-19T23:37:23+00:00",
+          "link": "https://arxiv.org/pdf/2608.19501v1",
+          "tags": [
+            "keyword:di",
+            "keyword:dj",
+            "keyword:organ-chip",
+            "keyword:top-journals",
+            "query:dj",
+            "query:organ-chip",
+            "query:top-journals"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "causal inference framework for evaluating AI-enabled medical devices",
+          "llm_evidence_cn": "用于评估AI医疗设备的因果推断框架",
+          "llm_evidence": "用于评估AI医疗设备的因果推断框架",
+          "canonical_evidence": "用于评估AI医疗设备的因果推断框架",
+          "llm_tldr_en": "Develops a causal inference approach that distinguishes explanatory and pragmatic effectiveness to evaluate diagnostic tests and AI-enabled medical devices, addressing the indirect impact on health outcomes.",
+          "llm_tldr_cn": "针对诊断测试和AI医疗设备间接影响健康结局难以评价的问题，本文提出因果推断方法区分解释性与实用性有效性。通过评估测试结果是否提供超出基线协变量的治疗相关信息，建立信息增强决策框架。这为AI诊断设备的临床验证提供了严谨的方法学基础。",
+          "llm_tldr": "针对诊断测试和AI医疗设备间接影响健康结局难以评价的问题，本文提出因果推断方法区分解释性与实用性有效性。通过评估测试结果是否提供超出基线协变量的治疗相关信息，建立信息增强决策框架。这为AI诊断设备的临床验证提供了严谨的方法学基础。",
+          "llm_tags": [
+            "query:top-journals"
+          ],
+          "matched_query_tag": "query:top-journals",
+          "matched_query_text": "AI clinical validation in top medical journals",
+          "matched_requirement_id": "req-21",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.19501v1",
+          "carry_days": 1
+        }
+      ]
     },
     "organ-chip": {
-      "updated_date": "20260728",
+      "updated_date": "20260824",
       "carryover_days": 9,
       "items": []
     },
     "dj": {
-      "updated_date": "20260728",
+      "updated_date": "20260824",
       "carryover_days": 9,
       "items": []
     }

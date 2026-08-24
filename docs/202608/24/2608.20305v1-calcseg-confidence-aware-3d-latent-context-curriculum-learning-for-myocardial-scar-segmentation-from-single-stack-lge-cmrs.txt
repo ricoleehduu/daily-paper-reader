@@ -1,0 +1,219 @@
+Title: CalcSeg: Confidence-aware 3D Latent Context Curriculum Learning For Myocardial Scar Segmentation From Single-Stack LGE-CMRs
+
+URL Source: https://arxiv.org/pdf/2608.20305v1
+
+Published Time: Fri, 21 Aug 2026 01:12:54 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# CalcSeg: Confidence-aware 3D Latent Context Curriculum Learning For Myocardial Scar Segmentation From Single-Stack LGE-CMRs 
+
+Nivetha Jayakumar 1, Hannah Kim 1, Amit R. Patel 2, and Miaomiao Zhang 1 
+
+> 1
+
+School of Engineering and Applied Science, University of Virginia, USA  
+
+> 2
+
+School of Medicine, University of Virginia, USA 
+
+vfb8zv@virginia.edu 
+
+Abstract. Myocardial scar segmentation from single-stack late gadolin-ium–enhanced cardiac magnetic resonance (LGE-CMR) imaging has been a longstanding and clinically important challenge, particularly in the presence of low tissue contrast, diffuse, and small scar regions. These challenges are further intensified by the limited availability of 3D spatial context. This paper presents CalcSeg , a Confidence-aware latent context curriculum learning framework that leverages fused 3D feature represen-tations from single-stack 2D LGE-CMR images for robust scar segmen-tation. Specifically, we introduce a dynamic semi-supervised curriculum learning strategy that progressively expands training from easier to more challenging scar cases using a learned confidence-aware scoring function. Such a function integrates errors in the predicted scar maps with quan-tified epistemic uncertainty and scar burden estimation to automatically assess sample difficulty without requiring manual labels. To compensate for the limited spatial context in single-stack acquisitions, we then de-velop a latent slice-wise self-attention to capture inter-slice dependencies and infer 3D spatial representations from sparse 2D inputs. We evalu-ate CalcSeg on multi-center clinical LGE-CMR datasets and benchmark against existing scar segmentation networks. Experimental results show that CalcSeg consistently outperforms all competing methods, particu-larly with substantial improvements on clinically challenging cases. Our code is released on Github 
+
+Keywords: Myocardial scar segmentation · Curriculum learning · Single-stack LGE-CMR. 
+
+# 1 Introduction 
+
+Myocardial scar segmentation from a single-stack LGE-CMR plays an impor-tant role in the detection and quantification of myocardial fibrosis and infarc-tion in patients with heart diseases [20]. The presence and extent of scar burden have shown to strongly predict adverse cardiovascular outcomes, including sud-den cardiac death, heart failure hospitalization, and mortality in ischemic and non-ischemic cardiomyopathies [4, 18]. Despite its clinical significance, manual arXiv:2608.20305v1 [cs.CV] 20 Aug 2026 2 N. Jayakumar et al. 
+
+scar delineation remains labor-intensive and often subject to inter-observer vari-ability [29]. A fully automated and robust method is needed in routine clinical workflows to provide accurate and reproducible detection of myocardial scar. Recent deep learning has achieved superior performance in myocardial scar segmentation from LGE-CMR images [30,31,33,38]. However, most existing ap-proaches operate on 2D slice-wise inputs and are primarily developed on cases with clear contrast and well-defined scar regions [17], or require multi-sequence input to achieve high performance [28]. As a result, segmentation performance re-mains challenging in clinically difficult scenarios with low-contrast enhancement, diffuse, and small scars [14, 16]. Prior efforts have attempted to address these issues with various strategies, including leveraging large foundation-models with boundary-robust metrics and data augmentation to increase the model’s robust-ness to challenging samples [24]. Other research groups utilize generative mod-els to improve low contrast samples before performing segmentation tasks [11]. Later, curriculum learning (CL) gained increasing attention in segmentation, as it offers a principled strategy to improve model performance by structuring training from high-confidence, reliable samples to more challenging or lower-confidence cases [2, 37]. However, existing CL typically rely on static predefined difficulty definitions, sample reweighting, or local-to-global schedules [15,34,36]. They do not explicitly model subject-level variability or pathology-specific pro-gression during training, which leave diffuse, heterogeneous, or uncertain cases insufficiently emphasized during learning [6]. While further works introduce par-tial inter-slice information from single-stack CMRs [5, 35], they do not model a complete 3D anatomical relationship to fully capture myocardial scars. In this paper, we present CalcSeg - a confidence-aware curriculum learning for LGE-CMR scar segmentation that explicitly accounts for sample difficulty with learned 3D latent context in single-stack data. Specifically, we introduce a novel, dynamic, and sample-specific confidence score derived from clinically rele-vant segmentation error metrics. This confidence measure induces a continuation schedule in the training sample space, progressively expanding the effective train-ing set from high-confidence (easy) cases to more challenging ones. By smoothly modulating the optimization landscape across stages, CalcSeg transitions from stable coarse learning to fine-grained refinement with improved robustness. Ad-ditionally, we develop a latent fusion module with slice-wise self-attention to cap-ture subject-level inter-slice correlations across the full LGE stack. This enables effective modeling of 3D contextual dependencies while preserving slice-specific features; hence enhancing consistency and anatomical plausibility in myocardial scar segmentation. Our contributions are threefold: (i.) Develop an semi-supervised confidence-aware curriculum learning of sample space that progressively expands training from easy to difficult landscape. (ii.) Introduce a latent 3D context formulation from single stack LGE-CMR with slice-wise self-attention to enforce subject-level anatomical consistency. (iii.) Experimental results show that our model achieves superior performance over existing segmentation models across multi-site data with challenging cardiomyopathy cases. Title Suppressed Due to Excessive Length 3
+
+# 2 Background: Curriculum Learning Scheme 
+
+This section briefly reviews the training paradigm of CL [2], which was em-ployed to improve deep network optimization by presenting training samples in a meaningful order (i.e., progressing from easy to hard examples) [19]. Inspired by human learning processes and continuation optimization strategies [26], CL has been shown to stabilize and accelerate convergence of the network training process. In contrast to conventional training schemes that implicitly assume a fixed notion of sample difficulty and rely on random sampling from the input data distribution or loss landscape [31], CL explicitly controls task complexity during training. By gradually increasing sample difficulty, the model is encouraged to first capture coarse and dominant structures before learning more challenging, ambiguous, or rare patterns [10]. Consider a training dataset of N samples, D = {(xi, y i)}Ni=1 , with network parameters, θ. CL can be formulated as training over a sequence of progressively expanded subsets, S1 ⊂ · · · Sk ⊂ · · · ⊂ St = D, k ∈ [1 , t ], where Sk, includes sam-ples up to a predefined difficulty level. Given a network loss function, L(θ; xi, y i),the optimization of CL at each stage k can be formulated as: 
+
+min 
+
+> θ
+
+X
+
+> (xi,y i)∈Sk
+
+L(θ; xi, y i). (1) The CL scheme can be interpreted as a continuation optimization strategy over the complete objective in Eq. (1) [26]. From this point of view, the loss landscape is progressively reshaped as increasingly difficult samples are incorpo-rated into training. Specifically, the early stages optimize a smoother objective constructed from high-confidence (easy) samples, yielding stable gradients and well-conditioned feature representations. As training proceeds, lower-confidence and more challenging samples are gradually introduced; thereby refining the solution toward the true objective. By initializing each stage with parameters learned from the previous stage, the CL optimization follows a continuous solu-tion trajectory with improved stability [19, 26]. 
+
+# 3 Our Method 
+
+This section outlines the details of CalcSeg, a confidence-aware CL framework that performs automatic scar delineation with improved precision, particularly in challenging cases. Our model features two key components: (i) a latent 3D context formulation with slice-wise self-attention for anatomical consistency, and (ii) a confidence-aware curriculum that progressively expands training from con-fident to ambiguous samples. An overall architecture is shown in Fig. 1. 
+
+Problem Setting. Let D = {(xi, y i)}Ni=1 be the dataset consisting of LGE images xi and its corresponding ground-truth scar segmentation labels yi. We design a deep network Fθ , with parameters θ, to predict the segmentation as 
+
+ˆy(θ)i = Fθ (xi).4 N. Jayakumar et al. 
+
+3D Latent Context Modeling. We first introduce a 3D latent attention mod-ule (as shown on the left panel of Fig. 1) that explicitly models subject-level 3D representations inferred from slice-wise 2D features, z; thereby improving seg-mentation across sparse LGE stacks. In contrast to previous approaches that pro-cess individual 2D slices [31], our model learns hierarchical inter-slice context in the latent space. More specifically, we develop an autoencoder architecture that integrates a Transformer-based encoder [8, 23] with a multi-scale convolutional decoder enhanced by a disentangled slice-wise self-attention [1]. This module is designed to effectively capture subject-level anatomical context by performing explicit 2D-to-3D latent feature fusion on the encoded latent features, z. In order to preserve slice order information, fixed sinusoidal positional embeddings are integrated along the slice dimension prior to attention modeling. In practice, we implement this slice-wise attention as a single-head self-attention, where queries ( Q), keys ( K), and values ( V ) are first obtained as linear projections of z, followed by the attention score computation as A =
+
+softmax 
+
+ QK ⊤
+
+> √C
+
+
+
+V . Here C denotes the projection dimension. To support vari-able stack sizes, a binary mask suppresses padded slices by setting their attention scores to −∞ before the softmax. The resulting slice-aware latent features encode subject-level anatomical context and are passed to the decoder for final segmen-tation. To reduce model complexity, we remove the auxiliary UNet branch used Confidence-Aware Curriculum Segmentation Network with 3D Latent Context   
+
+> LGE-CMR Input Scar Segmentation Output
+> . . .
+> Curriculum Stages k = 0 k = 1 k = t Dynamically Stratified Sample Space
+> 𝐷 ! > 𝜎 !
+> 𝐷 " > 𝜎 "
+> 𝐷 # > 𝜎 #
+> Segmentation Network Loss Landscape
+> . . .
+
+Fig. 1. Curriculum-guided training framework for LGE segmentation. Title Suppressed Due to Excessive Length 5
+
+in prior work [31] and instead introduce a custom residual decoder that refines multi-scale features. 
+
+Confidence-aware Curriculum Learning. In contrast to conventional CL strategies that rely on predefined or static difficulty scores for each training sample [10], we introduce a novel semi-supervised, model-adaptive difficulty for-mulation grounded in the network’s own training dynamics and predictive be-havior. Instead of assuming difficulty as an intrinsic property of the data, our approach dynamically quantifies it based on how the model performs and how confidently it makes predictions. For each data point, we define the difficulty score using two complementary components: (i) Predictive Inaccuracy . We measure task-relevant prediction error using two clinically and geometrically meaningful metrics: (a) the Dice Similarity Coef-ficient, ρ, which evaluates volumetric overlap between the predicted segmen-tation and ground truth [7], and (b) the percentage error in scar burden, v, a clinically established measure quantifying total myocardial scar volume [16]. These metrics ensure that difficulty reflects both spatial accuracy and clini-cally significant volumetric deviation. (ii) Predictive Uncertainty . We quantify epistemic uncertainty by measuring the variance of model outputs under stochastic forward passes. In this paper, we estimate uncertainty, ϵ, via Monte Carlo Dropout [9] applied to the final network layer, capturing the model’s confidence in its predictions. Similarly, other uncertainty quantification metrics [13] can also be applied. We compute these metrics during training and update them across CL stages, 
+
+k ∈ [0 , t ], to determine subsets {Sk}tk=0 . For each sample i, the difficulty com-ponents are defined as Di = [ γ1ρi, γ 2vi, γ 3ϵi], where {γj }3 
+
+> j=1
+
+are weighting pa-rameters. At stage k, the subset is determined by a confidence scoring function as 
+
+αi,k (Di) = 
+
+(1, if γ1ρi < σ (1)  
+
+> k
+
+|γ2vi > σ (2)  
+
+> k
+
+|γ3ϵi > σ (3)  
+
+> k
+
+,
+
+0, otherwise . (2) where σk denotes stage-dependent thresholds that are calculated automatically based on the median of the scores at each stage. This assigns a value of 1 to difficult samples if any of the components exceeds its threshold. 
+
+Sample-Space Continuation. To implement the proposed curriculum, we adopt a homotopy-based optimization [22] that progressively transforms the learning objective from an initially simplified problem defined by easier LGE cases to the full learning objective involving increasingly difficult examples. The total loss at any stage k is given as: 
+
+Lθ,k = 1ˆNk
+
+P ˆNk
+
+> i=1
+
+[−βkYi · ˆY ′δk 
+
+> i
+
+log( ˆYi) − (1 − βk)Y ′ 
+
+> i
+
+· ˆYiδk
+
+log( ˆY ′ 
+
+> i
+
+)]+ 1 − wfg ,k      
+
+> 2P
+> i∈MYiˆYi
+> P
+> i∈MYi+P
+> i∈MˆYi
+
++ (1 − wfg ,k ) 2 P         
+
+> i∈MY′
+> iˆY′
+> i
+> P
+> i∈MY′
+> i+P
+> i∈MˆY′
+> i
+
+!
+
+,
+
+where ˆNk ≜ size (Sk), y′ ≜ (1 − y). The Lθ represents a pixel-wise segmentation loss, which is a weighted sum of the focal and foreground-weighted Dice loss 6 N. Jayakumar et al. 
+
+minimized over the stages (as given in Eq. 1). The weighting parameter, wfg ,k ,balances the relative contributions of foreground and background overlap, while 
+
+βk and δk control the weightage on positive-negative cases and hard-to-classify pixels at each stage k.
+
+# 4 Experimental Results 
+
+This section describes the dataset used in our experiments, parameter setting of the proposed framework, evaluation metrics used to quantify segmentation performance, and comparison against SOTA LGE segmentation methods. 
+
+Dataset. We evaluate the proposed method on LGE-CMR datasets from four sites [27, 32] and two segmentation challenges, including the MICCAI 2012 Left Ventricular (LV) Infarct Challenge [17] and the EMIDEC 2020 challenge [21], comprising 976 patients diagnosed with ischemic and non-ischemic cardiomy-opathies and without fibrosis, where each subject has between 4-18 slices. Man-ual annotations of the LV and scar regions were provided by clinical experts. All slices were masked to the LV region using these contours, and further cropped and resized to 224 2. The dataset’s train/validation/test split is 7:1:2. 
+
+Parameter setting. We load the transformer encoder’s weights from Med-SAM [23] and pretrain the autoencoder on stacks of 2D LGE slices, through random mini-batching and the Adam optimizer with a learning rate of 1e − 4.This model serves as a baseline to start the curriculum stages. The foreground weighting for the dice loss, wf g ranges from 0.6 to 0.8, β of the focal loss from 
+
+0.25 to 0.35 , and δ from 1.25 to 2 based on the difficulty score Di. Although these parameters can be approximated from Di, we use fixed intervals for ease of optimization. The dropout probability of the decoder is 0.3. The loss terms are weighted by the inverse of their order of magnitude to ensure uniform numerical range. We obtain the mean standard deviation of 100 MC Dropout samples per subject to quantify the uncertainty. All experiments were carried out on NVIDIA A40 and V100 GPUs. 
+
+Evaluation against SOTA methods. We quantify the segmentation perfor-mance using Dice Similarity Coefficient and the percentage error in scar volume computed over the myocardium for the complete independent test set, and 6
+
+known challenging cases explicitly flagged by clinical experts. These metrics quantify overlap accuracy and clinically relevant volumetric error, respectively. The proposed method is compared against 5 state-of-the-art baselines, including TransUNet [3], AttentionUNet [25], UNETR [12], ScarNet [31] and the current SOTA ScarNet with supervised CL, where we leverage expert-provided difficulty labels for curriculum-guided training. 
+
+Results. Fig. 2 shows qualitative results of our method compared to the base-lines. CalcSeg achieves higher overlap with the ground truth scar as compared to the baselines with minimal false positives. Fig. 3 shows the quantified uncertainty at the end of each stage decreasing as the stages progress. The overall mean (left, Fig.3) appears relatively stable Title Suppressed Due to Excessive Length 7LGE CMR Ground Truth Attention UNET UNetR Trans-UNet ScarNet ScarNet-CL CalcSeg (Ours)   
+
+> Fig. 2. Qualitative LGE segmentation results: examples of clinically determined high (green) and low-confidence (red) cases vs. diffusive scar or low-contrast cases without a clinical confidence label (blue).
+> Fig. 3. Uncertainty quantified as the standard deviation of the Monte Carlo samples at the end of each stage of SCL, where it progressively decreases with the stages.
+
+since high-confidence cases dominate the test set (ratio 22:6). In contrast, when stratified by difficulty (right, Fig.3), uncertainty decreases substantially across stages for the clinically challenging subgroup. Tab. 1 summarizes the evaluation metrics, demonstrating that our method achieves higher overall performance. Our approach achieves improved scar bur-den estimation and higher myocardial agreement including healthy tissue, indi-cating that our framework effectively balances sensitivity and specificity. 8 N. Jayakumar et al. 
+
+Table 1. Quantitative comparison of LGE segmentation performance across SOTA baselines, reporting Myocardial Scar Dice (Dice), Low Confidence samples’ Dice (Dice low ), Scar Error (SE) and Low Confidence samples’ Scar Error (SE low ). Model Dice ↑ Dice low ↑ SE (%) ↓ SE low (%) ↓
+
+TransUNet 0.617 ± 0.24 0.460 ± 0.22 48.48 46.09 AttentionUNet 0.601 ± 0.25 0.454 ± 0.27 49.76 50.88 UNETR 0.524 ± 0.25 0.404 ± 0.26 57.22 45.95 ScarNet 0.615 ± 0.29 0.448 ± 0.21 46.11 49.97 ScarNet (Sup. CL) 0.644 ± 0.29 0.574 ± 0.23 45.07 48.34 
+
+CalcSeg (Ours) 0.677 ± 0.24 0.644 ± 0.22 38.88 35.03 
+
+Ablation studies. We perform ablation studies to quantify the contributions of the proposed components i.e., slice-wise latent self-attention (SA) and confidence-aware curriculum learning (CL). We evaluate three variants, which include the baseline model without SA and CL, model with only SA, and the full model with both components activated. Tab. 2 summarizes the results, demonstrating that SA improves overall segmentation performance, while the combination of SA and CL yields the best overall accuracy and scar volume error for difficult cases. These findings suggest SOTA methods underperform since they lack richer 3D context, operating on isolated 2D slices and random batch selection. 
+
+Table 2. Ablation study evaluating the contribution of our proposed components of SA and CL. Modules Dice ↑ Dice low ↑ SE (%) ↓ SE low (%) ↓ 
+
+> SA SCL
+
+× × 0.571 ± 0.24 0.495 ± 0.27 53.68 50.34 
+
+✓ × 0.639 ± 0.23 0.494 ± 0.29 47.46 46.89 
+
+× ✓ 0.644 ± 0.29 0.574 ± 0.23 45.07 48.34 
+
+✓ ✓ 0.677 ± 0.24 0.644 ± 0.22 38.88 35.03 
+
+# 5 Conclusion 
+
+In this paper, we present CalcSeg, a confidence-aware semi-supervised frame-work for myocardial scar segmentation from single-stack LGE-CMR. By defin-ing an semi-supervised curriculum learning during the training process with an uncertainty-guided difficulty estimation and combining it with slice-wise atten-tion for 3D latent context modeling, our method addresses the challenges of scar delineation in clinically challenging cases such as images with low contrast, het-erogeneous scars and diffuse or small scar volume. Experiments on multi-center Title Suppressed Due to Excessive Length 9
+
+in-house and public datasets show improved robustness, particularly on chal-lenging cases, highlighting the potential of CalcSeg as an annotation tool for automated clinical scar assessment. Future work will include integrating local-to-global curriculum approaches for network training, addressing uncertainty in scar tissue boundary, and incorporating multi-sequence CMR for better inflam-mation detection. 
+
+Acknowledgements. This work was supported by NIH 1R21EB032597, iPRIME Student Fellowship Award, and NSF CAREER 2239977. 
+
+Disclosure of Interests. The authors have no competing interests to declare that are relevant to the content of this article. 
+
+# References 
+
+1. Arnab, A., Dehghani, M., Heigold, G., Sun, C., Lučić, M., Schmid, C.: Vivit: A video vision transformer. In: Proceedings of the IEEE/CVF international confer-ence on computer vision. pp. 6836–6846 (2021) 2. Bengio, Y., Louradour, J., Collobert, R., et al.: Curriculum learning. In: Proceed-ings of the 26th annual international conference on machine learning. pp. 41–48 (2009) 3. Chen, J., Lu, Y., Yu, Q., et al.: Transunet: Transformers make strong encoders for medical image segmentation. arXiv preprint arXiv:2102.04306 (2021) 4. Coleman, G.C., Shaw, P.W., Balfour, P.C., et al.: Prognostic value of myocardial scarring on cmr in patients with cardiac sarcoidosis. JACC: Cardiovascular Imaging 
+
+10 (4), 411–420 (2017) 5. Crozier, T., Faure, A., Bos, D., et al.: Uncertainty-based segmentation of myocar-dial infarction areas on cardiac mr images 6. Cui, H., Jiang, L., Yuwen, C., Xia, Y., Zhang, Y.: Deep u-net architecture with cur-riculum learning for myocardial pathology segmentation in multi-sequence cardiac magnetic resonance images. Knowledge-based systems 249 , 108942 (2022) 7. Dice, L.R.: Measures of the amount of ecologic association between species. Ecology 
+
+26 (3), 297–302 (1945) 8. Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., et al.: An image is worth 16x16 words: Transformers for image recognition at scale. In: International Con-ference on Learning Representations (ICLR) (2021) 9. Gal, Y., Ghahramani, Z.: Dropout as a bayesian approximation: Representing model uncertainty in deep learning. In: international conference on machine learn-ing. pp. 1050–1059. PMLR (2016) 10. Gao, C., , et al.: Principled data selection for alignment: The hidden risks of dif-ficult examples. In: Proceedings of the 42nd International Conference on Machine Learning. Proceedings of Machine Learning Research, vol. 267, p. gao25f. PMLR (2025), https://proceedings.mlr.press/v267/gao25f.html 
+
+11. Hasny, M., Demirel, O.B., Amyar, A., Faghihroohi, S., Nezafat, R.: Myocardial scar enhancement in lge cardiac mri using localized diffusion. In: International Conference on Medical Image Computing and Computer-Assisted Intervention. pp. 307–316. Springer (2024) 10 N. Jayakumar et al. 12. Hatamizadeh, A., Tang, Y., Nath, V., Yang, D., Myronenko, A., Landman, B., Roth, H.R., Xu, D.: Unetr: Transformers for 3d medical image segmentation. In: Proceedings of the IEEE/CVF winter conference on applications of computer vi-sion. pp. 574–584 (2022) 13. He, W., Jiang, Z., Xiao, T., Xu, Z., Li, Y.: A survey on uncertainty quantification methods for deep learning. ACM Computing Surveys (2025) 14. Hoh, T., Margolis, I., Weine, J., et al.: Impact of late gadolinium enhancement image acquisition resolution on neural network based automatic scar segmentation. Journal of Cardiovascular Magnetic Resonance 26 (1), 101031 (2024) 15. Jayakumar, N., Pan, J., Wang, S., Paudel, B., Hosadurg, N., Singulane, C.C., Bhatt, S., Patel, A.R., Zhang, M.: Curriculum-guided myocardial scar segmenta-tion for ischemic and non-ischemic cardiomyopathy. In: 2026 IEEE 23rd Interna-tional Symposium on Biomedical Imaging (ISBI). pp. 1–5. IEEE (2026) 16. Jayakumar, N., Pan, J., Wang, S., et al.: Deep learning to predict myocardial scar burden and uncertainty quantification. Journal of Cardiovascular Magnetic Resonance 27 (2025) 17. Karim, R., Bhagirath, P., Claus, P., et al.: Evaluation of state-of-the-art segmen-tation algorithms for left ventricle infarct from late gadolinium enhancement mr images. Medical image analysis 30 , 95–107 (2016) 18. Kellman, P., Arai, A.E.: Cardiac imaging techniques for physicians: late enhance-ment. Journal of magnetic resonance imaging 36 (3), 529–542 (2012) 19. Krueger, K.A., Dayan, P.: Flexible shaping: How learning in small steps helps. Cognition 110 (3), 380–394 (2009) 20. Kwong, R.Y., Farzaneh-Far, A.: Measuring myocardial scar by cmr (2011) 21. Lalande, A., Chen, Z., Decourselle, T., et al.: Emidec: a database usable for the automatic evaluation of myocardial infarction from delayed-enhancement cardiac mri. Data 5(4), 89 (2020) 22. Lin, X., Yang, Z., Zhang, X., Zhang, Q.: Continuation path learning for homotopy optimization. In: International Conference on Machine Learning. pp. 21288–21311. PMLR (2023) 23. Ma, J., He, Y., Li, F., Han, L., You, C., Wang, B.: Segment anything in medical images. Nature Communications 15 (1), 654 (2024) 24. Moafi, A., Moafi, D., Mirkes, E.M., et al.: Robust deep learning for myocardial scar segmentation in cardiac mri with noisy labels. In: International Conference on Medical Image Computing and Computer-Assisted Intervention. pp. 529–539. Springer (2025) 25. Oktay, O., Schlemper, J., et al.: Attention u-net: Learning where to look for the pancreas. In: International Conference on Medical Imaging with Deep Learning (MIDL) (2018) 26. Pathak, H.N., Paffenroth, R.: Principled curriculum learning using parameter con-tinuation methods. arXiv preprint arXiv:2507.22089 (2025) 27. Paudel, B., Hosadurg, N., Patel, R., et al.: Cardiac mri parameters for risk predic-tion in cardiac sarcoidosis: Insights from a multicenter registry. Journal of Cardio-vascular Magnetic Resonance 28 (2026) 28. Qiu, J., Li, L., Wang, S., et al.: Myops-net: Myocardial pathology segmentation with flexible combination of multi-sequence cmr images. Medical image analysis 
+
+84 , 102694 (2023) 29. Rajchl, M., Stirrat, J., Goubran, M., Yu, J., Scholl, D., Peters, T.M., White, J.A.: Comparison of semi-automated scar quantification techniques using high-resolution, 3-dimensional late-gadolinium-enhancement magnetic resonance imag-ing. The international journal of cardiovascular imaging 31 (2), 349–357 (2015) Title Suppressed Due to Excessive Length 11 30. Ronneberger, O., Fischer, P., Brox, T.: U-net: Convolutional networks for biomedi-cal image segmentation. In: International Conference on Medical image computing and computer-assisted intervention. pp. 234–241. Springer (2015) 31. Tavakoli, N., Rahsepar, A.A., Benefield, B.C., Shen, D., López-Tapia, S., Schiffers, F., Goldberger, J.J., Albert, C.M., Wu, E., Katsaggelos, A.K., et al.: Scarnet: a novel foundation model for automated myocardial scar quantification from late gadolinium-enhancement images. Journal of Cardiovascular Magnetic Resonance p. 101945 (2025) 32. Wang, S., Patel, H., Miller, T., et al.: Ai based cmr assessment of biventricular function: clinical significance of intervendor variability and measurement errors. Cardiovascular Imaging 15 (3), 413–427 (2022) 33. Xing, J., Wang, S., Bilchick, K.C., et al.: Joint deep learning for improved myocar-dial scar detection from cardiac mri. In: 2023 IEEE 20th international symposium on biomedical imaging (ISBI). pp. 1–5. IEEE (2023) 34. Yang, B., Tian, Q., Liao, H., et al.: Progressive curriculum learning with scale-enhanced u-net for continuous airway segmentation. BMC Medical Imaging 26 ,43 (2025) 35. Zhang, Y.: Cascaded convolutional neural network for automatic myocardial infarc-tion segmentation from delayed-enhancement cardiac mri. In: International Work-shop on Statistical Atlases and Computational Models of the Heart. pp. 328–333. Springer (2020) 36. Zheng, X., Zhang, Y., Zhang, H., et al.: Curriculum prompting foundation models for medical image segmentation. In: International conference on medical image computing and computer-assisted intervention. pp. 487–497. Springer (2024) 37. Zhou, T., Wang, S., Bilmes, J.: Robust curriculum learning: from clean label de-tection to noisy label self-correction. In: International conference on learning rep-resentations (2021) 38. Zou, R., Li, Y., Zhou, N., Guan, X., Li, G., Xie, D., Bo, J., Li, S., Wu, M., Deng, J., et al.: Scarelastic: continuous elasticity field modeling for myocardial scar de-lineation in lge-cmr. npj Digital Medicine (2025)
