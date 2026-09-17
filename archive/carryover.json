@@ -1,30 +1,30 @@
 {
-  "generated_at": "2026-09-16T22:06:07.706401+00:00",
-  "updated_date": "20260916",
+  "generated_at": "2026-09-17T22:48:39.897066+00:00",
+  "updated_date": "20260917",
   "carryover_days": 9,
   "tag_states": {
     "di": {
-      "updated_date": "20260916",
+      "updated_date": "20260917",
       "carryover_days": 9,
       "items": []
     },
     "mit": {
-      "updated_date": "20260916",
+      "updated_date": "20260917",
       "carryover_days": 9,
       "items": []
     },
     "top-journals": {
-      "updated_date": "20260916",
+      "updated_date": "20260917",
       "carryover_days": 9,
       "items": []
     },
     "organ-chip": {
-      "updated_date": "20260916",
+      "updated_date": "20260917",
       "carryover_days": 9,
       "items": []
     },
     "dj": {
-      "updated_date": "20260916",
+      "updated_date": "20260917",
       "carryover_days": 9,
       "items": []
     }
